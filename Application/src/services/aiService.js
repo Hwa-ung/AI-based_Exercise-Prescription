@@ -21,7 +21,7 @@ function buildPromptSnippet(goal, bmi) {
   for (const part of PART_ORDER) {
     const items = (partMap[part] || [])
       .sort((a, b) => a.g['우선순위'] - b.g['우선순위'])
-      .slice(0, 5);
+      .slice(0, 3);
     if (!items.length) continue;
     lines.push(`\n[${part}]`);
     for (const { name, info, g } of items) {
@@ -186,16 +186,15 @@ ${goalRules}
 
 ${snippet}
 
-[출력 규칙]
-- 위 운동 목록에 있는 종목만 사용할 것
-- 홈트 동작(맨몸 버피, 점프 스쿼트 등) 제외
-- 휴식일에는 exercises를 빈 배열로
-- 모든 요일 포함 (monday ~ sunday)
-- 유산소는 cardio 필드에 별도 작성
-- duration은 플랭크/유산소에만 포함`.trim();
+[출력 형식]
+{"weeklyRoutine":{"monday":{"part":"부위","focus":"세션명","exercises":[{"name":"운동명","sets":3,"reps":10,"rest":"90초","note":"메모"}]},"tuesday":{...},"wednesday":{...},"thursday":{...},"friday":{...},"saturday":{"part":"휴식","focus":"Rest","exercises":[]},"sunday":{"part":"휴식","focus":"Rest","exercises":[]}}}
+유산소 있는 날: "cardio":{"name":"종목","duration":"30분","intensity":"중강도"} 추가
+duration 필드는 플랭크/유산소에만 포함
 
-    const fsInput  = goal === '근력_상승' ? FEWSHOT_STRENGTH_INPUT  : FEWSHOT_DIET_INPUT;
-    const fsOutput = goal === '근력_상승' ? FEWSHOT_STRENGTH_OUTPUT : FEWSHOT_DIET_OUTPUT;
+[출력 규칙]
+- 위 운동 목록에 있는 종목만 사용
+- 홈트 동작 제외
+- 모든 요일 포함 (monday~sunday)`.trim();
 
     const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
@@ -205,13 +204,11 @@ ${snippet}
       body: JSON.stringify({
         system_instruction: { parts: [{ text: systemPrompt }] },
         contents: [
-          { role: 'user',  parts: [{ text: formatUserMessage(fsInput) }] },
-          { role: 'model', parts: [{ text: JSON.stringify(fsOutput, null, 2) }] },
-          { role: 'user',  parts: [{ text: formatUserMessage(userData, completedHistory) }] },
+          { role: 'user', parts: [{ text: formatUserMessage(userData, completedHistory) }] },
         ],
         generationConfig: {
           temperature: 0.7,
-          maxOutputTokens: 4000,
+          maxOutputTokens: 2500,
           responseMimeType: 'application/json',
         },
       }),
