@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Copy-Item *)",
+      "PowerShell(New-Item *)",
+      "Bash(npm install *)",
+      "Bash(npx vite *)",
+      "PowerShell(Get-ChildItem \"C:\\\\wefitai\\\\Application\" -Recurse -File | Where-Object { $_.FullName -notmatch 'node_modules|dist' } | Select-Object -ExpandProperty FullName)",
+      "Bash(npm run *)",
+      "WebFetch(domain:www.lyfta.app)",
+      "WebFetch(domain:lyfta.app)",
+      "Bash(powershell *)"
+    ]
+  }
+}
