@@ -196,7 +196,7 @@ duration 필드는 플랭크/유산소에만 포함
 - 홈트 동작 제외
 - 모든 요일 포함 (monday~sunday)`.trim();
 
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
 
     const response = await fetch(url, {
       method: 'POST',
