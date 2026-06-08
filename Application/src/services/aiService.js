@@ -167,6 +167,12 @@ const AIService = {
     const rawKey = envKey.trim() || StorageService.get('gemini_api_key');
     const apiKey = typeof rawKey === 'string' ? rawKey.trim() : '';
 
+    // 24시간 캐시: 같은 유저·목표·날짜면 API 호출 생략
+    const today = new Date().toISOString().split('T')[0];
+    const cacheKey = `wefit_ai_cache_${userData.userId || 'guest'}_${userData.goal}_${today}`;
+    const cached = StorageService.get(cacheKey);
+    if (cached) return cached;
+
     if (!apiKey) {
       await new Promise(r => setTimeout(r, 800));
       return userData.goal === '근력_상승' ? FEWSHOT_STRENGTH_OUTPUT : FEWSHOT_DIET_OUTPUT;
@@ -229,7 +235,9 @@ duration 필드는 플랭크/유산소에만 포함
     text = text.trim();
     if (text.startsWith('```')) text = text.split('\n').slice(1).join('\n');
     if (text.endsWith('```'))   text = text.split('\n').slice(0, -1).join('\n');
-    return JSON.parse(text);
+    const result = JSON.parse(text);
+    StorageService.set(cacheKey, result);
+    return result;
   },
 };
 
