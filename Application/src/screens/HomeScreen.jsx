@@ -72,7 +72,6 @@ export default function HomeScreen() {
   const [activeChart,   setActiveChart]   = useState('bmi');
 
   const [showSettings,  setShowSettings]  = useState(false);
-  const [apiKey,        setApiKey]        = useState('');
   const [goal,          setGoal]          = useState('근력_상승');
   const [profileForm,   setProfileForm]   = useState({ name: '', birthDate: '', gender: 'MALE' });
   const [settingsError, setSettingsError] = useState('');
@@ -98,9 +97,7 @@ export default function HomeScreen() {
     const workoutList = StorageService.get(`wefit_workout_${u.userId}`) || [];
     if (workoutList.length) setLatestWorkout(workoutList[workoutList.length - 1]);
 
-    const savedKey  = StorageService.get('gemini_api_key');
     const savedGoal = StorageService.get(`wefit_goal_${u.userId}`);
-    if (savedKey)  setApiKey(savedKey);
     if (savedGoal) setGoal(savedGoal);
   };
 
@@ -114,7 +111,6 @@ export default function HomeScreen() {
       if (bd > now) { setSettingsError('생년월일은 오늘 이후일 수 없습니다.'); return; }
       if (bd.getFullYear() < now.getFullYear() - 120) { setSettingsError('올바른 생년월일을 입력해주세요.'); return; }
     }
-    StorageService.set('gemini_api_key', apiKey.trim());
     StorageService.set(`wefit_goal_${user.userId}`, goal);
     try { AuthService.updateProfile({ userId: user.userId, ...profileForm }); } catch { /* ignore */ }
     setShowSettings(false);
@@ -374,30 +370,7 @@ export default function HomeScreen() {
               </select>
             </div>
 
-            <div className="form-group">
-              <label>Google Gemini API Key <span style={{ fontSize: 11, color: '#9e9e9e', fontWeight: 400 }}>(없으면 예시 처방 사용)</span></label>
-              {import.meta.env.VITE_GEMINI_API_KEY?.trim() ? (
-                <p style={{ fontSize: 12, color: '#2e7d32', margin: '6px 0 0', padding: '10px 12px', background: '#f1f8e9', borderRadius: 8 }}>
-                  🔑 .env 파일의 키가 적용 중입니다.
-                </p>
-              ) : (
-                <>
-                  <input type="text" placeholder="AIza..." value={apiKey} onChange={e => setApiKey(e.target.value)}
-                    style={{ fontFamily: 'monospace', fontSize: 13 }} autoComplete="off" spellCheck={false} />
-                  {apiKey && !apiKey.trim().startsWith('AIza') && (
-                    <p style={{ fontSize: 12, color: '#e65100', marginTop: 4 }}>⚠️ Gemini API 키는 <b>AIza</b>로 시작해야 합니다.</p>
-                  )}
-                  {apiKey && apiKey.trim().startsWith('AIza') && (
-                    <p style={{ fontSize: 12, color: '#2e7d32', marginTop: 4 }}>✅ 형식 확인 완료</p>
-                  )}
-                  {!apiKey && (
-                    <p style={{ fontSize: 11, color: '#bdbdbd', marginTop: 4 }}>aistudio.google.com → Get API key → 무료 발급</p>
-                  )}
-                </>
-              )}
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 10 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 10, marginTop: 16 }}>
               <button className="btn-primary" onClick={saveSettings}>저장</button>
               <button onClick={() => { AuthService.logout(); navigate('/login'); }}
                 style={{ padding: '14px 20px', background: '#ffebee', color: '#c62828', border: 'none', borderRadius: 12, cursor: 'pointer', fontSize: 14, fontWeight: 600, fontFamily: 'inherit', whiteSpace: 'nowrap' }}>

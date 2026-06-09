@@ -168,8 +168,8 @@ export default function WorkoutScreen() {
         availableDays: days,
       }, completedHistory.length > 0 ? completedHistory : null);
 
-      if (result._isQuotaFallback) {
-        setWarn('Gemini API 무료 할당량 초과 — 예시 처방을 표시합니다. 유료 플랜으로 업그레이드하거나 내일 다시 시도해주세요.');
+      if (result._isFallback) {
+        setWarn('AI 서버 일시 오류 — 예시 처방을 표시합니다. 잠시 후 다시 시도해주세요.');
       }
 
       const wr = result.weeklyRoutine;
@@ -240,11 +240,9 @@ export default function WorkoutScreen() {
           }
         </button>
 
-        {!StorageService.get('gemini_api_key') && (
-          <p style={{ fontSize: 11, color: '#bdbdbd', marginTop: 8, textAlign: 'center' }}>
-            API 키 없이 예시 처방이 제공됩니다 · 홈 → 설정에서 Gemini 키 입력
-          </p>
-        )}
+        <p style={{ fontSize: 11, color: '#bdbdbd', marginTop: 8, textAlign: 'center' }}>
+          AI가 신체정보 기반으로 맞춤 루틴을 생성합니다 (서버 처리)
+        </p>
       </div>
 
       {routine && (
