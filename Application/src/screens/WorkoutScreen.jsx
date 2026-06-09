@@ -95,8 +95,16 @@ export default function WorkoutScreen() {
   const [error,       setError]       = useState('');
   const [warn,        setWarn]        = useState('');
   const [selectedDay, setSelectedDay] = useState('monday');
+  const [cooldown,    setCooldown]    = useState(0);   // 연타 방지(초)
 
   const user = AuthService.getCurrentUser();
+
+  // 쿨다운 카운트다운
+  useEffect(() => {
+    if (cooldown <= 0) return;
+    const t = setTimeout(() => setCooldown(c => c - 1), 1000);
+    return () => clearTimeout(t);
+  }, [cooldown]);
 
   useEffect(() => {
     if (!user) { navigate('/login'); return; }
@@ -130,6 +138,7 @@ export default function WorkoutScreen() {
   };
 
   const handleGenerate = async () => {
+    if (loading || cooldown > 0) return;   // 연타 방지
     setError('');
     setWarn('');
     const bodyList = StorageService.get(`wefit_body_${user.userId}`) || [];
@@ -146,6 +155,7 @@ export default function WorkoutScreen() {
     setLoading(true);
     try {
       const result = await AIService.generateWorkout({
+        userId:        user.userId,
         name:          user.name || user.userId,
         age,
         gender:        profile.gender === 'FEMALE' ? '여' : '남',
@@ -182,6 +192,7 @@ export default function WorkoutScreen() {
       setError('운동 처방 생성 실패: ' + err.message);
     } finally {
       setLoading(false);
+      setCooldown(5);   // 생성 후 5초간 재요청 차단 (15 RPM 방어)
     }
   };
 
@@ -220,10 +231,12 @@ export default function WorkoutScreen() {
         {warn  && <div style={{ background: '#fff8e1', border: '1px solid #ffe082', borderRadius: 10, padding: '10px 14px', fontSize: 13, color: '#795548', marginBottom: 10 }}>⚠️ {warn}</div>}
         {error && <div className="error-msg">{error}</div>}
 
-        <button className="btn-primary" onClick={handleGenerate} disabled={loading}>
+        <button className="btn-primary" onClick={handleGenerate} disabled={loading || cooldown > 0}>
           {loading
             ? <><span className="spinner" style={{ display: 'inline-block', width: 18, height: 18, verticalAlign: 'middle', marginRight: 8, border: '2px solid rgba(255,255,255,0.4)', borderTopColor: 'white' }} /> AI 생성 중...</>
-            : '🤖 AI 운동 처방 생성'
+            : cooldown > 0
+              ? `⏳ 잠시 후 다시 시도 (${cooldown}초)`
+              : '🤖 AI 운동 처방 생성'
           }
         </button>
 

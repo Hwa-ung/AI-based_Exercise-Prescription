@@ -225,7 +225,9 @@ duration 필드는 플랭크/유산소에만 포함
       const msg = err?.error?.message || `HTTP ${response.status}`;
       if (response.status === 429 || /quota/i.test(msg)) {
         const fallback = userData.goal === '근력_상승' ? FEWSHOT_STRENGTH_OUTPUT : FEWSHOT_DIET_OUTPUT;
-        return { ...fallback, _isQuotaFallback: true };
+        const quotaResult = { ...fallback, _isQuotaFallback: true };
+        StorageService.set(cacheKey, quotaResult);
+        return quotaResult;
       }
       throw new Error(msg);
     }
