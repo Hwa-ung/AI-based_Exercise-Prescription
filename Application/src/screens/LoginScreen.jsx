@@ -10,13 +10,13 @@ export default function LoginScreen() {
 
   const update = (k) => (e) => setForm(p => ({ ...p, [k]: e.target.value }));
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     if (!form.userId || !form.password) { setError('아이디와 비밀번호를 입력하세요.'); return; }
     setLoading(true);
     try {
-      AuthService.login(form);
+      await AuthService.login(form);
       navigate('/');
     } catch (err) {
       setError(err.message);

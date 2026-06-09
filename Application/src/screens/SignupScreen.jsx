@@ -13,7 +13,7 @@ export default function SignupScreen() {
 
   const update = (k) => (e) => setForm(p => ({ ...p, [k]: e.target.value }));
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     if (!form.name || !form.userId || !form.password) { setError('필수 항목을 모두 입력하세요.'); return; }
@@ -22,7 +22,7 @@ export default function SignupScreen() {
     if (form.password !== form.confirmPw)              { setError('비밀번호가 일치하지 않습니다.'); return; }
     setLoading(true);
     try {
-      AuthService.register(form);
+      await AuthService.register(form);
       navigate('/login');
     } catch (err) {
       setError(err.message);

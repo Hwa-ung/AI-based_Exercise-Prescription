@@ -103,7 +103,7 @@ export default function HomeScreen() {
 
   useEffect(() => { loadData(); }, []);
 
-  const saveSettings = () => {
+  const saveSettings = async () => {
     setSettingsError('');
     if (profileForm.birthDate) {
       const bd  = new Date(profileForm.birthDate);
@@ -112,7 +112,7 @@ export default function HomeScreen() {
       if (bd.getFullYear() < now.getFullYear() - 120) { setSettingsError('올바른 생년월일을 입력해주세요.'); return; }
     }
     StorageService.set(`wefit_goal_${user.userId}`, goal);
-    try { AuthService.updateProfile({ userId: user.userId, ...profileForm }); } catch { /* ignore */ }
+    try { await AuthService.updateProfile({ userId: user.userId, ...profileForm }); } catch { /* ignore */ }
     setShowSettings(false);
     loadData();
   };
