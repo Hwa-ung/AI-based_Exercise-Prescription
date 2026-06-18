@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthService    from '../services/authService';
 import StorageService from '../services/storageService';
+import SyncService    from '../services/syncService';
 import AIService      from '../services/aiService';
 import BottomNav      from '../components/BottomNav';
 import { getLyftaMedia } from '../data/lyftaCodes';
@@ -185,6 +186,7 @@ export default function WorkoutScreen() {
       workouts.push(workoutRecord);
       StorageService.set(`wefit_workout_${user.userId}`, workouts);
       StorageService.set(`wefit_goal_${user.userId}`, goal);
+      SyncService.save(user.userId);
 
       const firstActive = DAYS.find(d => wr[d]?.exercises?.length > 0 || wr[d]?.cardio);
       if (firstActive) setSelectedDay(firstActive);
@@ -247,12 +249,10 @@ export default function WorkoutScreen() {
 
       {routine && (
         <>
-          {/* 요일 탭 — 1일차/2일차 표시 */}
+          {/* 요일 탭 — 운동 있는 날만 표시 */}
           <div style={{ display: 'flex', gap: 7, padding: '4px 16px 4px', overflowX: 'auto' }}>
-            {DAYS.map(day => {
-              const d      = routine[day];
+            {DAYS.filter(day => routine[day]?.exercises?.length > 0 || routine[day]?.cardio).map(day => {
               const active = selectedDay === day;
-              const hasCt  = d?.exercises?.length > 0 || d?.cardio;
               const lbl    = dayLabel(day);
               return (
                 <button
@@ -262,16 +262,13 @@ export default function WorkoutScreen() {
                     flexShrink: 0, width: 44, height: 52, borderRadius: 12,
                     border: active ? 'none' : '1.5px solid #e8e8e8',
                     cursor: 'pointer', fontFamily: 'inherit',
-                    background: active ? '#43a047' : (hasCt ? '#e8f5e9' : 'white'),
-                    color: active ? 'white' : (hasCt ? '#2e7d32' : '#9e9e9e'),
+                    background: active ? '#43a047' : '#e8f5e9',
+                    color: active ? 'white' : '#2e7d32',
                     display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1,
                   }}
                 >
                   <span style={{ fontSize: 15, fontWeight: 700, lineHeight: 1 }}>{lbl.top}</span>
                   <span style={{ fontSize: 9, lineHeight: 1, opacity: active ? 0.9 : 0.7 }}>{lbl.bot}</span>
-                  {hasCt && !active && (
-                    <div style={{ width: 4, height: 4, borderRadius: '50%', background: '#43a047', marginTop: 2 }} />
-                  )}
                 </button>
               );
             })}
@@ -317,30 +314,6 @@ export default function WorkoutScreen() {
             )}
           </div>
 
-          {/* 주간 요약 */}
-          <div className="card" style={{ marginTop: 0 }}>
-            <h3 style={{ fontWeight: 700, fontSize: 15, marginBottom: 12 }}>주간 요약</h3>
-            <div style={{ display: 'flex', gap: 6, justifyContent: 'center' }}>
-              {DAYS.map(day => {
-                const d     = routine[day];
-                const hasCt = d?.exercises?.length > 0 || d?.cardio;
-                const num   = dayToNum[day];
-                return (
-                  <div key={day} style={{ textAlign: 'center', flex: 1 }}>
-                    <div style={{ width: 36, height: 36, margin: '0 auto 4px', borderRadius: 10, background: hasCt ? '#e8f5e9' : '#f5f5f5', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-                      {hasCt
-                        ? <><span style={{ fontSize: 11, fontWeight: 700, color: '#2e7d32', lineHeight: 1 }}>{num}</span><span style={{ fontSize: 7, color: '#66bb6a' }}>일차</span></>
-                        : <span style={{ fontSize: 18 }}>😴</span>
-                      }
-                    </div>
-                    <div style={{ fontSize: 9, color: hasCt ? '#43a047' : '#bdbdbd', fontWeight: hasCt ? 600 : 400 }}>
-                      {hasCt ? '운동' : '휴식'}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
         </>
       )}
 

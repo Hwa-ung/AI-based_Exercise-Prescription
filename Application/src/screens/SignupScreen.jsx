@@ -20,6 +20,13 @@ export default function SignupScreen() {
     if (form.userId.length < 4)                       { setError('아이디는 4자 이상이어야 합니다.'); return; }
     if (form.password.length < 6)                     { setError('비밀번호는 6자 이상이어야 합니다.'); return; }
     if (form.password !== form.confirmPw)              { setError('비밀번호가 일치하지 않습니다.'); return; }
+    if (form.birthDate) {
+      const bd  = new Date(form.birthDate);
+      const now = new Date(); now.setHours(0, 0, 0, 0);
+      if (isNaN(bd.getTime()))                         { setError('올바른 생년월일을 입력해주세요.'); return; }
+      if (bd > now)                                    { setError('생년월일은 오늘 이후일 수 없습니다.'); return; }
+      if (bd.getFullYear() < now.getFullYear() - 120)  { setError('올바른 생년월일을 입력해주세요.'); return; }
+    }
     setLoading(true);
     try {
       await AuthService.register(form);
@@ -69,7 +76,7 @@ export default function SignupScreen() {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
             <div className="form-group" style={{ marginBottom: 0 }}>
               <label>생년월일</label>
-              <input type="date" value={form.birthDate} onChange={update('birthDate')} />
+              <input type="date" value={form.birthDate} max={new Date().toISOString().split('T')[0]} onChange={update('birthDate')} />
             </div>
             <div className="form-group" style={{ marginBottom: 0 }}>
               <label>성별</label>

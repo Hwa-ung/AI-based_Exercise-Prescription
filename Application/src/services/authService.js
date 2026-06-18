@@ -1,3 +1,5 @@
+import SyncService from './syncService';
+
 const SESSION_KEY = 'wefit_session';
 
 // 세션은 sessionStorage에 저장 → 탭/브라우저를 닫으면 사라짐 (매번 로그인 필요).
@@ -38,6 +40,8 @@ const AuthService = {
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || '로그인 실패');
     SessionStore.set(data);
+    // 로그인 성공 후 DB에서 최신 데이터 동기화
+    await SyncService.load(data.userId);
     return data;
   },
 

@@ -5,14 +5,14 @@ import exerciseDb    from '../data/exerciseDb.json';
 import { getLyftaMedia } from '../data/lyftaCodes';
 import BottomNav     from '../components/BottomNav';
 
-// 부위 순서 및 이모지
+// 부위 순서 및 이미지
 const PART_META = {
-  '가슴': { emoji: '🫁', color: '#1976d2', bg: '#e3f2fd' },
-  '등':   { emoji: '🦾', color: '#2e7d32', bg: '#e8f5e9' },
-  '하체': { emoji: '🦵', color: '#e65100', bg: '#fff3e0' },
-  '어깨': { emoji: '🏋️', color: '#6a1b9a', bg: '#f3e5f5' },
-  '팔':   { emoji: '💪', color: '#00838f', bg: '#e0f7fa' },
-  '복근': { emoji: '🔥', color: '#c62828', bg: '#ffebee' },
+  '가슴': { img: '/img_body/chest.png',    color: '#1976d2', bg: '#e3f2fd' },
+  '등':   { img: '/img_body/back.png',     color: '#2e7d32', bg: '#e8f5e9' },
+  '하체': { img: '/img_body/training.png', color: '#e65100', bg: '#fff3e0' },
+  '어깨': { img: '/img_body/shoulder.png', color: '#6a1b9a', bg: '#f3e5f5' },
+  '팔':   { img: '/img_body/biceps.png',   color: '#00838f', bg: '#e0f7fa' },
+  '복근': { img: '/img_body/human.png',    color: '#c62828', bg: '#ffebee' },
 };
 const CATEGORIES = ['전체', ...Object.keys(PART_META)];
 
@@ -51,9 +51,12 @@ function ExerciseCard({ name, data }) {
         {/* 부위 아이콘 */}
         <div style={{
           width: 44, height: 44, borderRadius: 13, flexShrink: 0,
-          background: meta.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20,
+          background: meta.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden',
         }}>
-          {meta.emoji}
+          {meta.img
+            ? <img src={meta.img} alt={data.부위} style={{ width: 30, height: 30, objectFit: 'contain' }} />
+            : <span style={{ fontSize: 20 }}>💪</span>
+          }
         </div>
 
         <div style={{ flex: 1, minWidth: 0 }}>
@@ -232,7 +235,7 @@ export default function LibraryScreen() {
                 transition: 'all 0.15s',
               }}
             >
-              {m ? `${m.emoji} ` : ''}{cat}
+              {cat}
               <span style={{ marginLeft: 4, fontSize: 11, opacity: 0.8 }}>
                 {counts[cat] || 0}
               </span>

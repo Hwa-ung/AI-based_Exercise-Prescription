@@ -6,6 +6,7 @@ import {
 } from 'recharts';
 import AuthService    from '../services/authService';
 import StorageService from '../services/storageService';
+import SyncService    from '../services/syncService';
 import BodyAnalyzer   from '../services/bodyAnalyzer';
 import BottomNav      from '../components/BottomNav';
 
@@ -50,9 +51,8 @@ const LineTooltip = ({ active, payload, label, unit }) => {
 };
 
 const BODY_CHARTS = [
-  { key: 'bmi',     label: 'BMI',     unit: '',   color: '#43a047', ref: [18.5, 23, 25] },
-  { key: 'weight',  label: '체중',    unit: 'kg', color: '#1976d2', ref: [] },
-  { key: 'bodyFat', label: '체지방률', unit: '%', color: '#e53935', ref: [] },
+  { key: 'bmi',    label: 'BMI', unit: '',   color: '#43a047', ref: [18.5, 23, 25] },
+  { key: 'weight', label: '체중', unit: 'kg', color: '#1976d2', ref: [] },
 ];
 
 const BMI_CLASS = { 정상: 'badge-normal', 저체중: 'badge-info', 과체중: 'badge-warning', 비만: 'badge-danger' };
@@ -113,6 +113,7 @@ export default function HomeScreen() {
     }
     StorageService.set(`wefit_goal_${user.userId}`, goal);
     try { await AuthService.updateProfile({ userId: user.userId, ...profileForm }); } catch { /* ignore */ }
+    SyncService.save(user.userId);
     setShowSettings(false);
     loadData();
   };
@@ -147,6 +148,7 @@ export default function HomeScreen() {
       : r
     );
     StorageService.set(`wefit_body_${user.userId}`, updated);
+    SyncService.save(user.userId);
     setBodyHistory(updated);
     if (updated.length) setLatestBody(updated[updated.length - 1]);
     setEditRecord(null);
@@ -155,6 +157,7 @@ export default function HomeScreen() {
   const deleteRecord = (recordId) => {
     const updated = bodyHistory.filter(r => r.recordId !== recordId);
     StorageService.set(`wefit_body_${user.userId}`, updated);
+    SyncService.save(user.userId);
     setBodyHistory(updated);
     setLatestBody(updated.length ? updated[updated.length - 1] : null);
     setEditRecord(null);
@@ -305,7 +308,7 @@ export default function HomeScreen() {
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 12 }}>
               <thead>
                 <tr style={{ borderBottom: '2px solid #f0f0f0' }}>
-                  {['날짜', 'BMI', '체중', '체지방', '근력량', ''].map(h => (
+                  {['날짜', 'BMI', '체중', ''].map(h => (
                     <th key={h} style={{ padding: '7px 3px', color: '#9e9e9e', fontWeight: 600, textAlign: h === '날짜' ? 'left' : 'center', fontSize: 11 }}>{h}</th>
                   ))}
                 </tr>
@@ -318,8 +321,6 @@ export default function HomeScreen() {
                       <span style={{ fontWeight: 600, color: '#43a047' }}>{h.bmi}</span>
                     </td>
                     <td style={{ textAlign: 'center', padding: '9px 3px' }}>{h.weight}kg</td>
-                    <td style={{ textAlign: 'center', padding: '9px 3px', color: '#757575' }}>{h.bodyFat ? `${h.bodyFat}%` : '—'}</td>
-                    <td style={{ textAlign: 'center', padding: '9px 3px', color: '#757575' }}>{h.muscleMass ? `${h.muscleMass}kg` : '—'}</td>
                     <td style={{ textAlign: 'center', padding: '6px 2px' }}>
                       <button onClick={() => openEditRecord(h)}
                         style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 13, padding: '2px 3px', color: '#43a047' }}>✏️</button>

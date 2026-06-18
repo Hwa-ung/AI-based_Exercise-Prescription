@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthService    from '../services/authService';
 import StorageService from '../services/storageService';
+import SyncService    from '../services/syncService';
 import BodyAnalyzer   from '../services/bodyAnalyzer';
 import BottomNav      from '../components/BottomNav';
 
@@ -81,7 +82,9 @@ export default function BodyInputScreen() {
     const list = StorageService.get(`wefit_body_${u.userId}`) || [];
     list.push(record);
     StorageService.set(`wefit_body_${u.userId}`, list);
+    SyncService.save(u.userId);
     setSaved(true);
+    setTimeout(() => navigate('/'), 800);
   };
 
   return (

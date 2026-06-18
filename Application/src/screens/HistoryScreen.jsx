@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthService    from '../services/authService';
 import StorageService from '../services/storageService';
+import SyncService    from '../services/syncService';
 import exerciseDb     from '../data/exerciseDb.json';
 import { getLyftaMedia } from '../data/lyftaCodes';
 import BottomNav      from '../components/BottomNav';
@@ -34,7 +35,7 @@ function buildRoutineDayLabels(routine) {
 }
 
 // ─── 운동 행 컴포넌트 ────────────────────────────────────────────
-function ExerciseRow({ ex, onToggle, onDelete }) {
+function ExerciseRow({ ex, onToggle, onDelete, onEdit }) {
   const [expanded, setExpanded] = useState(false);
   const media  = getLyftaMedia(ex.name);
   const ytUrl  = `https://www.youtube.com/results?search_query=${encodeURIComponent(ex.name + ' 운동 방법')}`;
@@ -56,14 +57,20 @@ function ExerciseRow({ ex, onToggle, onDelete }) {
           <div style={{ fontSize: 12, color: '#9e9e9e', marginTop: 2 }}>
             {ex.sets}세트 × {ex.reps > 0 ? `${ex.reps}회` : (ex.duration || '시간 측정')}
             {ex.weight ? ` · ${ex.weight}kg` : ''}
-            {` · 휴식 ${ex.rest}`}
+            {ex.rest ? ` · 휴식 ${ex.rest}` : ''}
           </div>
         </div>
+
+        {/* 수정 */}
+        <button onClick={onEdit}
+          style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 14, padding: '4px', color: '#bdbdbd', flexShrink: 0 }}>
+          ✏️
+        </button>
 
         {/* 영상 토글 */}
         <button onClick={() => setExpanded(v => !v)}
           style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 16, padding: '4px', color: media ? '#2e7d32' : '#FF0000', flexShrink: 0 }}>
-          {media ? (expanded ? '▼' : '▶') : '📺'}
+          {media ? (expanded ? '⏸' : '▶') : '📺'}
         </button>
 
         {/* 삭제 */}
@@ -119,12 +126,16 @@ export default function HistoryScreen() {
   const [checkedExs,  setCheckedExs]  = useState({});
 
   // 도감에서 추가 상태
-  const [libSearch,   setLibSearch]   = useState('');
-  const [libSelected, setLibSelected] = useState(null);
-  const [libForm,     setLibForm]     = useState({ sets: '3', reps: '12', weight: '', rest: '60초' });
+  const [libSearch,    setLibSearch]    = useState('');
+  const [libSelected,  setLibSelected]  = useState(null);
+  const [libCategory,  setLibCategory]  = useState('전체');
 
   // 중복 확인 다이얼로그
-  const [dupConfirm,  setDupConfirm]  = useState(null);
+  const [dupConfirm,   setDupConfirm]   = useState(null);
+
+  // 운동 수정 모달
+  const [editingEx,  setEditingEx]  = useState(null);
+  const [editForm,   setEditForm]   = useState({ sets: '', reps: '', weight: '', rest: '' });
 
   const user    = AuthService.getCurrentUser();
   const CAL_KEY = `wefit_calendar_${user?.userId}`;
@@ -157,6 +168,7 @@ export default function HistoryScreen() {
   const saveCalData = (updated) => {
     setCalData(updated);
     StorageService.set(CAL_KEY, updated);
+    if (user) SyncService.save(user.userId);
   };
 
   const toggleDone = (id) => {
@@ -196,8 +208,35 @@ export default function HistoryScreen() {
     setCheckedExs({});
     setLibSearch('');
     setLibSelected(null);
-    setLibForm({ sets: '3', reps: '12', weight: '', rest: '60초' });
+    setLibCategory('전체');
     setDupConfirm(null);
+  };
+
+  // 운동 수정 저장
+  const openEditEx = (ex) => {
+    setEditingEx(ex);
+    setEditForm({
+      sets:   String(ex.sets || 3),
+      reps:   String(ex.reps || 12),
+      weight: ex.weight != null ? String(ex.weight) : '',
+      rest:   ex.rest || '60초',
+    });
+  };
+
+  const saveEditEx = () => {
+    if (!editingEx) return;
+    const updated = {
+      ...editingEx,
+      sets:   parseInt(editForm.sets)   || editingEx.sets,
+      reps:   parseInt(editForm.reps)   || editingEx.reps,
+      weight: editForm.weight ? parseFloat(editForm.weight) : null,
+      rest:   editForm.rest || editingEx.rest,
+    };
+    saveCalData({
+      ...calData,
+      [selDate]: (calData[selDate] || []).map(e => e.id === editingEx.id ? updated : e),
+    });
+    setEditingEx(null);
   };
 
   // AI 처방 → 선택 추가
@@ -208,15 +247,21 @@ export default function HistoryScreen() {
     tryAddExercises(selected);
   };
 
-  // 도감에서 직접 추가
+  // 도감에서 직접 추가 (기본값 사용)
   const handleLibAdd = () => {
     if (!libSelected) return;
+    const db = exerciseDb[libSelected];
+    const preset = db?.근력_상승?.권장_세트 || '3세트 × 12회';
+    const setsMatch = preset.match(/(\d+)[~\-]?(\d+)?세트/);
+    const repsMatch = preset.match(/(\d+)[~\-]?(\d+)?회/);
+    const sets = setsMatch ? parseInt(setsMatch[1]) : 3;
+    const reps = repsMatch ? parseInt(repsMatch[1]) : 12;
     tryAddExercises([{
       name:   libSelected,
-      sets:   parseInt(libForm.sets)  || 3,
-      reps:   parseInt(libForm.reps)  || 12,
-      weight: libForm.weight ? parseFloat(libForm.weight) : null,
-      rest:   libForm.rest || '60초',
+      sets,
+      reps,
+      weight: null,
+      rest:   db?.근력_상승?.권장_휴식 || '60초',
       note:   '',
     }]);
   };
@@ -231,12 +276,17 @@ export default function HistoryScreen() {
   const routineDayLabels = buildRoutineDayLabels(latestRoutine);
 
   // ── 도감 목록 ────────────────────────────────────────────────────
+  const LIB_PARTS = ['전체', '가슴', '등', '하체', '어깨', '팔', '복근'];
+
   const libExercises = useMemo(() => {
     const q = libSearch.trim();
-    return Object.keys(exerciseDb).filter(name =>
-      !q || name.includes(q) || exerciseDb[name].세부_부위?.some(m => m.includes(q))
-    );
-  }, [libSearch]);
+    return Object.keys(exerciseDb).filter(name => {
+      const d = exerciseDb[name];
+      const matchCat  = libCategory === '전체' || d.부위 === libCategory;
+      const matchText = !q || name.includes(q) || d.세부_부위?.some(m => m.includes(q));
+      return matchCat && matchText;
+    });
+  }, [libSearch, libCategory]);
 
   return (
     <div className="screen">
@@ -350,6 +400,7 @@ export default function HistoryScreen() {
                 ex={ex}
                 onToggle={() => toggleDone(ex.id)}
                 onDelete={() => deleteExercise(ex.id)}
+                onEdit={() => openEditEx(ex)}
               />
             ))}
           </div>
@@ -490,7 +541,16 @@ export default function HistoryScreen() {
                     <>
                       <input type="text" placeholder="운동 이름 검색..." value={libSearch}
                         onChange={e => setLibSearch(e.target.value)}
-                        style={{ width: '100%', padding: '10px 12px', borderRadius: 12, border: '1.5px solid #e0e0e0', fontSize: 14, fontFamily: 'inherit', boxSizing: 'border-box', marginBottom: 10 }} />
+                        style={{ width: '100%', padding: '10px 12px', borderRadius: 12, border: '1.5px solid #e0e0e0', fontSize: 14, fontFamily: 'inherit', boxSizing: 'border-box', marginBottom: 8 }} />
+                      {/* 부위 필터 */}
+                      <div style={{ display: 'flex', gap: 6, overflowX: 'auto', marginBottom: 10, paddingBottom: 2 }}>
+                        {LIB_PARTS.map(part => (
+                          <button key={part} onClick={() => setLibCategory(part)}
+                            style={{ flexShrink: 0, padding: '5px 12px', borderRadius: 16, border: libCategory === part ? 'none' : '1.5px solid #e8e8e8', cursor: 'pointer', fontFamily: 'inherit', fontSize: 12, fontWeight: libCategory === part ? 700 : 400, background: libCategory === part ? '#43a047' : 'white', color: libCategory === part ? 'white' : '#555' }}>
+                            {part}
+                          </button>
+                        ))}
+                      </div>
                       <div>
                         {libExercises.slice(0, 60).map(name => (
                           <div key={name} onClick={() => setLibSelected(name)}
@@ -514,21 +574,18 @@ export default function HistoryScreen() {
                         <span style={{ fontWeight: 700, fontSize: 15 }}>{libSelected}</span>
                       </div>
 
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 14 }}>
-                        {[
-                          { label: '세트 수',   key: 'sets',   type: 'number', placeholder: '3' },
-                          { label: '횟수 (회)', key: 'reps',   type: 'number', placeholder: '12' },
-                          { label: '무게 (kg)', key: 'weight', type: 'number', placeholder: '선택' },
-                          { label: '휴식 시간', key: 'rest',   type: 'text',   placeholder: '60초' },
-                        ].map(f => (
-                          <div key={f.key} className="form-group" style={{ marginBottom: 0 }}>
-                            <label style={{ fontSize: 12 }}>{f.label}</label>
-                            <input type={f.type} placeholder={f.placeholder} value={libForm[f.key]}
-                              onChange={e => setLibForm(v => ({ ...v, [f.key]: e.target.value }))}
-                              style={{ padding: '9px 12px', fontSize: 14 }} />
+                      {/* 운동 정보 미리보기 */}
+                      {(() => {
+                        const db = exerciseDb[libSelected];
+                        const preset = db?.근력_상승?.권장_세트 || '';
+                        return db ? (
+                          <div style={{ background: '#f9f9f9', borderRadius: 12, padding: '12px 14px', marginBottom: 16 }}>
+                            <div style={{ fontSize: 12, color: '#9e9e9e', marginBottom: 6 }}>{db.부위} · {db.난이도}</div>
+                            {preset && <div style={{ fontSize: 13, color: '#43a047', fontWeight: 600 }}>{preset}</div>}
+                            {db.근력_상승?.권장_휴식 && <div style={{ fontSize: 12, color: '#757575', marginTop: 4 }}>휴식: {db.근력_상승.권장_휴식}</div>}
                           </div>
-                        ))}
-                      </div>
+                        ) : null;
+                      })()}
 
                       <button className="btn-primary" onClick={handleLibAdd}>
                         캘린더에 추가하기
@@ -538,6 +595,37 @@ export default function HistoryScreen() {
                 )}
               </div>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* ══ 운동 수정 모달 ══ */}
+      {editingEx && (
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', zIndex: 400, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16 }}
+          onClick={() => setEditingEx(null)}>
+          <div onClick={e => e.stopPropagation()}
+            style={{ background: 'white', borderRadius: 20, padding: 24, width: '100%', maxWidth: 400 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+              <h3 style={{ fontSize: 16, fontWeight: 700 }}>✏️ 운동 수정</h3>
+              <button onClick={() => setEditingEx(null)} style={{ background: 'none', border: 'none', fontSize: 22, color: '#bdbdbd', cursor: 'pointer' }}>×</button>
+            </div>
+            <div style={{ fontSize: 14, fontWeight: 600, color: '#43a047', marginBottom: 14 }}>{editingEx.name}</div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 16 }}>
+              {[
+                { label: '세트 수',   key: 'sets',   type: 'number', placeholder: '3' },
+                { label: '횟수 (회)', key: 'reps',   type: 'number', placeholder: '12' },
+                { label: '무게 (kg)', key: 'weight', type: 'number', placeholder: '선택' },
+                { label: '휴식 시간', key: 'rest',   type: 'text',   placeholder: '60초' },
+              ].map(f => (
+                <div key={f.key} className="form-group" style={{ marginBottom: 0 }}>
+                  <label style={{ fontSize: 12 }}>{f.label}</label>
+                  <input type={f.type} placeholder={f.placeholder} value={editForm[f.key]}
+                    onChange={e => setEditForm(v => ({ ...v, [f.key]: e.target.value }))}
+                    style={{ padding: '9px 12px', fontSize: 14 }} />
+                </div>
+              ))}
+            </div>
+            <button className="btn-primary" onClick={saveEditEx}>저장</button>
           </div>
         </div>
       )}
