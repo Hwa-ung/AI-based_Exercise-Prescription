@@ -8,8 +8,8 @@ import BottomNav      from '../components/BottomNav';
 import { getLyftaMedia } from '../data/lyftaCodes';
 
 const DAYS = ['monday','tuesday','wednesday','thursday','friday','saturday','sunday'];
+const DAY_KR = { monday: '월', tuesday: '화', wednesday: '수', thursday: '목', friday: '금', saturday: '토', sunday: '일' };
 
-// 1일차/2일차 매핑 계산
 function buildDayNumberMap(routine) {
   if (!routine) return {};
   const map = {};
@@ -33,22 +33,24 @@ function ExerciseRow({ ex, index }) {
   const ytUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(ex.name + ' 운동 방법')}`;
 
   return (
-    <div style={{ borderBottom: '1px solid #f5f5f5', cursor: 'pointer' }} onClick={() => setOpen(o => !o)}>
-      <div style={{ display: 'flex', alignItems: 'center', padding: '13px 0', gap: 12 }}>
-        <div style={{ width: 28, height: 28, background: '#43a047', color: 'white', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700, flexShrink: 0 }}>
-          {index + 1}
-        </div>
+    <div style={{ borderBottom: '1px solid #f1f3f8', cursor: 'pointer' }} onClick={() => setOpen(o => !o)}>
+      <div style={{ display: 'flex', alignItems: 'center', padding: '13px 0', gap: 14 }}>
+        <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 13, fontWeight: 600, color: '#c2c7d2', width: 18, flexShrink: 0 }}>
+          {String(index + 1).padStart(2, '0')}
+        </span>
         <div style={{ flex: 1 }}>
-          <div style={{ fontWeight: 600, fontSize: 15 }}>{ex.name}</div>
-          <div style={{ fontSize: 13, color: '#757575', marginTop: 2 }}>{repText} · 휴식 {ex.rest}</div>
+          <div style={{ fontWeight: 600, fontSize: 15, color: '#0e1525' }}>{ex.name}</div>
+          <div style={{ fontSize: 13, color: '#6b7385', marginTop: 2 }}>{repText}</div>
         </div>
-        <span style={{ fontSize: 13, color: '#bdbdbd' }}>{open ? '▲' : '▼'}</span>
+        <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 13, color: '#6b7385' }}>
+          {ex.sets}×{ex.reps > 0 ? ex.reps : ex.duration}
+        </span>
       </div>
 
       {open && (
-        <div style={{ paddingBottom: 14 }} onClick={e => e.stopPropagation()}>
+        <div style={{ paddingBottom: 14, paddingLeft: 32 }} onClick={e => e.stopPropagation()}>
           {ex.note && (
-            <div style={{ paddingLeft: 40, fontSize: 13, color: '#43a047', marginBottom: 10 }}>💡 {ex.note}</div>
+            <div style={{ fontSize: 13, color: '#2f54ff', marginBottom: 10 }}>💡 {ex.note}</div>
           )}
 
           {media && !vidError ? (
@@ -63,21 +65,21 @@ function ExerciseRow({ ex, index }) {
             </div>
           ) : (
             <a href={ytUrl} target="_blank" rel="noopener noreferrer"
-              style={{ textDecoration: 'none', display: 'block', marginLeft: 40 }}>
+              style={{ textDecoration: 'none', display: 'block' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10, background: '#fff8f8', border: '1px solid #ffcdd2', borderRadius: 12, padding: '10px 14px' }}>
                 <div style={{ width: 34, height: 34, borderRadius: 9, background: '#FF0000', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                   <span style={{ color: 'white', fontSize: 15 }}>▶</span>
                 </div>
                 <div>
-                  <div style={{ fontSize: 13, fontWeight: 600, color: '#212121' }}>{ex.name} 운동 방법</div>
-                  <div style={{ fontSize: 11, color: '#9e9e9e', marginTop: 1 }}>YouTube에서 검색 →</div>
+                  <div style={{ fontSize: 13, fontWeight: 600, color: '#0e1525' }}>{ex.name} 운동 방법</div>
+                  <div style={{ fontSize: 11, color: '#9aa1b2', marginTop: 1 }}>YouTube에서 검색 →</div>
                 </div>
               </div>
             </a>
           )}
 
           {media && !vidError && (
-            <div style={{ paddingLeft: 4, fontSize: 10, color: '#bdbdbd', textAlign: 'right', marginTop: 2 }}>
+            <div style={{ fontSize: 10, color: '#c2c7d2', textAlign: 'right', marginTop: 2 }}>
               영상 출처: lyfta.app
             </div>
           )}
@@ -96,11 +98,10 @@ export default function WorkoutScreen() {
   const [error,       setError]       = useState('');
   const [warn,        setWarn]        = useState('');
   const [selectedDay, setSelectedDay] = useState('monday');
-  const [cooldown,    setCooldown]    = useState(0);   // 연타 방지(초)
+  const [cooldown,    setCooldown]    = useState(0);
 
   const user = AuthService.getCurrentUser();
 
-  // 쿨다운 카운트다운
   useEffect(() => {
     if (cooldown <= 0) return;
     const t = setTimeout(() => setCooldown(c => c - 1), 1000);
@@ -120,10 +121,8 @@ export default function WorkoutScreen() {
     }
   }, [user?.userId]);
 
-  // 1일차/2일차 매핑
   const dayToNum = buildDayNumberMap(routine);
 
-  // 완료한 운동 기록 수집
   const getCompletedHistory = () => {
     const calData = StorageService.get(`wefit_calendar_${user.userId}`) || {};
     const today   = new Date().toISOString().split('T')[0];
@@ -139,7 +138,7 @@ export default function WorkoutScreen() {
   };
 
   const handleGenerate = async () => {
-    if (loading || cooldown > 0) return;   // 연타 방지
+    if (loading || cooldown > 0) return;
     setError('');
     setWarn('');
     const bodyList = StorageService.get(`wefit_body_${user.userId}`) || [];
@@ -194,38 +193,36 @@ export default function WorkoutScreen() {
       setError('운동 처방 생성 실패: ' + err.message);
     } finally {
       setLoading(false);
-      setCooldown(5);   // 생성 후 5초간 재요청 차단 (15 RPM 방어)
+      setCooldown(5);
     }
   };
 
   const dayData   = routine?.[selectedDay];
   const hasContent = dayData && (dayData.exercises?.length > 0 || dayData.cardio);
-  const dayLabel  = (day) => {
-    if (dayToNum[day]) return { top: dayToNum[day], bot: '일차' };
-    return { top: '휴', bot: '식' };
-  };
 
   return (
     <div className="screen">
-      <div className="header">
-        <h1>운동 처방 🤖</h1>
-        <p>AI가 생성한 맞춤형 주간 루틴</p>
+      {/* 헤더 */}
+      <div style={{ padding: '14px 22px 12px', display: 'flex', alignItems: 'center', gap: 8, borderBottom: '1px solid #eaecf2', background: '#fff', position: 'sticky', top: 0, zIndex: 100 }}>
+        <div style={{ width: 26, height: 26, borderRadius: 8, background: '#2f54ff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: 15, color: '#fff' }}>W</span>
+        </div>
+        <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: 17, letterSpacing: -0.5, color: '#0e1525' }}>WeFitAI</span>
       </div>
 
-      {/* 컨트롤 */}
-      <div className="card">
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 14 }}>
-          <div className="form-group" style={{ marginBottom: 0 }}>
-            <label style={{ fontSize: 12 }}>운동 목표</label>
-            <select value={goal} onChange={e => setGoal(e.target.value)} style={{ padding: '10px 12px', fontSize: 14 }}>
-              <option value="근력_상승">💪 근력 상승</option>
-              <option value="다이어트">🔥 다이어트</option>
+      {/* 컨트롤 영역 */}
+      <div style={{ padding: '18px 22px 0' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+          <div style={{ fontSize: 18, fontWeight: 700, letterSpacing: -0.4, color: '#0e1525' }}>운동 처방</div>
+          <div style={{ display: 'flex', gap: 6 }}>
+            <select value={goal} onChange={e => setGoal(e.target.value)}
+              style={{ fontSize: 11, fontWeight: 700, border: '1.5px solid #2f54ff', color: '#2f54ff', background: '#ecf0ff', padding: '6px 10px', borderRadius: 9, fontFamily: 'inherit', cursor: 'pointer', appearance: 'none' }}>
+              <option value="근력_상승">근력 강화</option>
+              <option value="다이어트">다이어트</option>
             </select>
-          </div>
-          <div className="form-group" style={{ marginBottom: 0 }}>
-            <label style={{ fontSize: 12 }}>주간 운동 일수</label>
-            <select value={days} onChange={e => setDays(parseInt(e.target.value))} style={{ padding: '10px 12px', fontSize: 14 }}>
-              {[3, 4, 5, 6].map(d => <option key={d} value={d}>{d}일/주</option>)}
+            <select value={days} onChange={e => setDays(parseInt(e.target.value))}
+              style={{ fontSize: 11, fontWeight: 500, border: '1px solid #eaecf2', color: '#9aa1b2', background: '#fff', padding: '6px 10px', borderRadius: 9, fontFamily: 'inherit', cursor: 'pointer', appearance: 'none' }}>
+              {[3, 4, 5, 6].map(d => <option key={d} value={d}>{d}일</option>)}
             </select>
           </div>
         </div>
@@ -235,85 +232,78 @@ export default function WorkoutScreen() {
 
         <button className="btn-primary" onClick={handleGenerate} disabled={loading || cooldown > 0}>
           {loading
-            ? <><span className="spinner" style={{ display: 'inline-block', width: 18, height: 18, verticalAlign: 'middle', marginRight: 8, border: '2px solid rgba(255,255,255,0.4)', borderTopColor: 'white' }} /> AI 생성 중...</>
+            ? <><span className="spinner" />AI 생성 중...</>
             : cooldown > 0
-              ? `⏳ 잠시 후 다시 시도 (${cooldown}초)`
-              : '🤖 AI 운동 처방 생성'
+              ? `잠시 후 다시 시도 (${cooldown}초)`
+              : 'AI 운동 처방 생성'
           }
         </button>
-
-        <p style={{ fontSize: 11, color: '#bdbdbd', marginTop: 8, textAlign: 'center' }}>
-          AI가 신체정보 기반으로 맞춤 루틴을 생성합니다 (서버 처리)
-        </p>
+        <div style={{ fontSize: 11, color: '#c2c7d2', marginTop: 8, textAlign: 'center' }}>
+          AI가 신체정보 기반으로 맞춤 루틴을 생성합니다
+        </div>
       </div>
 
       {routine && (
         <>
-          {/* 요일 탭 — 운동 있는 날만 표시 */}
-          <div style={{ display: 'flex', gap: 7, padding: '4px 16px 4px', overflowX: 'auto' }}>
+          {/* 요일 탭 */}
+          <div style={{ display: 'flex', gap: 5, padding: '20px 22px 0', borderBottom: '1px solid #eaecf2', marginTop: 4 }}>
             {DAYS.filter(day => routine[day]?.exercises?.length > 0 || routine[day]?.cardio).map(day => {
               const active = selectedDay === day;
-              const lbl    = dayLabel(day);
+              const num    = dayToNum[day];
               return (
                 <button
                   key={day}
                   onClick={() => setSelectedDay(day)}
                   style={{
-                    flexShrink: 0, width: 44, height: 52, borderRadius: 12,
-                    border: active ? 'none' : '1.5px solid #e8e8e8',
-                    cursor: 'pointer', fontFamily: 'inherit',
-                    background: active ? '#43a047' : '#e8f5e9',
-                    color: active ? 'white' : '#2e7d32',
-                    display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1,
+                    flex: 1, padding: '8px 0', border: 'none', background: 'none',
+                    cursor: 'pointer', fontFamily: 'inherit', fontSize: 14,
+                    fontWeight: active ? 700 : 400,
+                    color: active ? '#2f54ff' : '#6b7385',
+                    borderBottom: active ? '2px solid #2f54ff' : '2px solid transparent',
+                    marginBottom: -1,
                   }}
                 >
-                  <span style={{ fontSize: 15, fontWeight: 700, lineHeight: 1 }}>{lbl.top}</span>
-                  <span style={{ fontSize: 9, lineHeight: 1, opacity: active ? 0.9 : 0.7 }}>{lbl.bot}</span>
+                  {num ? `${num}일` : DAY_KR[day]}
                 </button>
               );
             })}
           </div>
 
           {/* 운동 상세 */}
-          <div className="card" style={{ marginTop: 4 }}>
-            <div style={{ marginBottom: 14 }}>
-              <h3 style={{ fontSize: 17, fontWeight: 700 }}>
-                {dayToNum[selectedDay] ? `${dayToNum[selectedDay]}일차` : '휴식일'} — {dayData?.part || ''}
-              </h3>
-              {dayData?.focus && dayData.focus !== 'Rest' && (
-                <span className="badge badge-info" style={{ marginTop: 6, display: 'inline-block' }}>{dayData.focus}</span>
+          <div style={{ padding: '18px 22px 0' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 14 }}>
+              <span style={{ fontSize: 18, fontWeight: 700, color: '#0e1525', letterSpacing: -0.4 }}>
+                {dayToNum[selectedDay] ? `${dayToNum[selectedDay]}일차` : '휴식일'}
+                {dayData?.part && <span style={{ color: '#c2c7d2', fontWeight: 400 }}> / {dayData.part}</span>}
+              </span>
+              {dayData?.exercises?.length > 0 && (
+                <span style={{ fontSize: 12, color: '#9aa1b2' }}>
+                  {dayData.exercises.length}종목
+                </span>
               )}
             </div>
 
             {!hasContent ? (
-              <div style={{ textAlign: 'center', padding: '28px 0', color: '#bdbdbd' }}>
+              <div style={{ textAlign: 'center', padding: '40px 0', color: '#c2c7d2' }}>
                 <div style={{ fontSize: 40, marginBottom: 8 }}>😴</div>
-                <div>휴식일입니다. 충분히 쉬어주세요!</div>
+                <div style={{ fontSize: 14 }}>휴식일입니다. 충분히 쉬어주세요!</div>
               </div>
             ) : (
               <>
                 {dayData.exercises?.map((ex, i) => <ExerciseRow key={i} ex={ex} index={i} />)}
 
                 {dayData.cardio && (
-                  <div style={{ marginTop: 14, background: '#e3f2fd', borderRadius: 14, padding: '14px 16px' }}>
-                    <div style={{ fontWeight: 700, fontSize: 14, color: '#1565c0', marginBottom: 6 }}>🏃 유산소 운동</div>
-                    <div style={{ fontSize: 14, color: '#1976d2' }}>{dayData.cardio.name}</div>
-                    <div style={{ display: 'flex', gap: 8, marginTop: 6 }}>
-                      <span className="badge badge-info">{dayData.cardio.duration}</span>
-                      <span className="badge badge-info">{dayData.cardio.intensity}</span>
+                  <div style={{ display: 'flex', alignItems: 'center', padding: '13px 0', borderBottom: '1px solid #f1f3f8' }}>
+                    <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 15, fontWeight: 600, color: '#2f54ff', width: 18, flexShrink: 0 }}>+</span>
+                    <div style={{ flex: 1, marginLeft: 14 }}>
+                      <div style={{ fontWeight: 600, fontSize: 15, color: '#0e1525' }}>유산소 — {dayData.cardio.name}</div>
+                      <div style={{ fontSize: 13, color: '#6b7385', marginTop: 2 }}>{dayData.cardio.duration} · {dayData.cardio.intensity}</div>
                     </div>
                   </div>
                 )}
-
-                <div style={{ marginTop: 14, background: '#f9f9f9', borderRadius: 10, padding: '10px 14px', fontSize: 12, color: '#9e9e9e' }}>
-                  총 {dayData.exercises?.length || 0}개 종목
-                  {dayData.cardio ? ' + 유산소' : ''}
-                  {' · '}각 운동을 탭하면 상세를 확인할 수 있습니다
-                </div>
               </>
             )}
           </div>
-
         </>
       )}
 

@@ -30,57 +30,49 @@ export default function LoginScreen() {
       minHeight: '100vh',
       display: 'flex',
       flexDirection: 'column',
-      background: 'linear-gradient(160deg, #1b5e20 0%, #43a047 45%, #e8f5e9 100%)',
+      background: '#fff',
+      padding: '0 28px',
     }}>
-      {/* Logo */}
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '48px 20px 24px' }}>
+      {/* Logo area */}
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', paddingTop: 64 }}>
         <div style={{
-          width: 88, height: 88,
-          background: 'rgba(255,255,255,0.18)',
-          borderRadius: 28,
+          width: 60, height: 60, borderRadius: 16,
+          background: '#2f54ff',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: 48,
-          marginBottom: 16,
-          backdropFilter: 'blur(4px)',
-          border: '1.5px solid rgba(255,255,255,0.3)',
-        }}>🏋️</div>
-        <h1 style={{ fontSize: 36, fontWeight: 700, color: 'white', letterSpacing: -1 }}>WeFitAI</h1>
-        <p style={{ color: 'rgba(255,255,255,0.82)', fontSize: 15, marginTop: 6 }}>
-          AI 기반 맞춤형 운동처방 서비스
-        </p>
+          boxShadow: '0 10px 24px rgba(47,84,255,0.30)',
+        }}>
+          <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: 30, color: '#fff', lineHeight: 1 }}>W</span>
+        </div>
+        <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 32, fontWeight: 700, letterSpacing: -1, color: '#0e1525', marginTop: 24 }}>
+          WeFitAI
+        </div>
+        <div style={{ fontSize: 15, color: '#6b7385', marginTop: 8, lineHeight: 1.55 }}>
+          데이터로 만들어지는<br />맞춤형 운동 처방.
+        </div>
       </div>
 
-      {/* Card */}
-      <div style={{
-        background: 'white',
-        borderRadius: '28px 28px 0 0',
-        padding: '32px 24px 40px',
-        boxShadow: '0 -8px 40px rgba(0,0,0,0.12)',
-      }}>
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#212121', marginBottom: 24 }}>로그인</h2>
-
+      {/* Form area */}
+      <div style={{ paddingBottom: 48 }}>
         {error && <div className="error-msg">{error}</div>}
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label>아이디</label>
-            <input type="text" placeholder="아이디를 입력하세요" value={form.userId} onChange={update('userId')} />
+            <input type="text" placeholder="아이디를 입력하세요" value={form.userId} onChange={update('userId')} autoComplete="username" />
           </div>
-          <div className="form-group">
+          <div className="form-group" style={{ marginBottom: 22 }}>
             <label>비밀번호</label>
-            <input type="password" placeholder="비밀번호를 입력하세요" value={form.password} onChange={update('password')} />
+            <input type="password" placeholder="비밀번호를 입력하세요" value={form.password} onChange={update('password')} autoComplete="current-password" />
           </div>
           <button className="btn-primary" type="submit" disabled={loading}>
             {loading ? '로그인 중...' : '로그인'}
           </button>
         </form>
 
-        <p style={{ textAlign: 'center', marginTop: 20, color: '#9e9e9e', fontSize: 14 }}>
+        <div style={{ textAlign: 'center', marginTop: 18, fontSize: 13, color: '#9aa1b2' }}>
           계정이 없으신가요?{' '}
-          <Link to="/signup" style={{ color: '#43a047', fontWeight: 600, textDecoration: 'none' }}>
-            회원가입
-          </Link>
-        </p>
+          <Link to="/signup" style={{ color: '#2f54ff', fontWeight: 700, textDecoration: 'none' }}>회원가입</Link>
+        </div>
       </div>
     </div>
   );

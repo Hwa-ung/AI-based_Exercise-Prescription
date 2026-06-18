@@ -39,64 +39,79 @@ export default function SignupScreen() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', background: '#f5f7fa' }}>
+    <div style={{ minHeight: '100vh', background: '#fff', display: 'flex', flexDirection: 'column' }}>
       {/* Header */}
-      <div className="header" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-        <Link to="/login" style={{ color: 'white', textDecoration: 'none', fontSize: 22, lineHeight: 1 }}>←</Link>
-        <div>
-          <h1>회원가입</h1>
-          <p>WeFitAI와 함께 건강을 시작하세요</p>
-        </div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '14px 22px 10px' }}>
+        <Link to="/login" style={{
+          width: 34, height: 34, borderRadius: 10,
+          border: '1px solid #eaecf2', display: 'flex',
+          alignItems: 'center', justifyContent: 'center',
+          color: '#6b7385', textDecoration: 'none', fontSize: 18, lineHeight: 1,
+        }}>←</Link>
+        <div style={{ fontSize: 22, fontWeight: 700, letterSpacing: -0.5, color: '#0e1525' }}>회원가입</div>
       </div>
 
-      <div className="card" style={{ marginTop: 16 }}>
+      <div style={{ flex: 1, padding: '6px 22px 40px', overflowY: 'auto' }}>
         {error && <div className="error-msg">{error}</div>}
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label>이름 <span style={{ color: '#e53935' }}>*</span></label>
+            <label>이름 <span style={{ color: '#2f54ff' }}>*</span></label>
             <input type="text" placeholder="이름을 입력하세요" value={form.name} onChange={update('name')} />
           </div>
 
           <div className="form-group">
-            <label>아이디 <span style={{ color: '#e53935' }}>*</span></label>
-            <input type="text" placeholder="영문+숫자, 4자 이상" value={form.userId} onChange={update('userId')} />
+            <label>아이디 <span style={{ color: '#2f54ff' }}>*</span></label>
+            <input type="text" placeholder="영문+숫자, 4자 이상" value={form.userId} onChange={update('userId')} autoComplete="username" />
           </div>
 
           <div className="form-group">
-            <label>비밀번호 <span style={{ color: '#e53935' }}>*</span></label>
-            <input type="password" placeholder="6자 이상" value={form.password} onChange={update('password')} />
+            <label>비밀번호 <span style={{ color: '#2f54ff' }}>*</span></label>
+            <input type="password" placeholder="6자 이상" value={form.password} onChange={update('password')} autoComplete="new-password" />
           </div>
 
           <div className="form-group">
-            <label>비밀번호 확인 <span style={{ color: '#e53935' }}>*</span></label>
-            <input type="password" placeholder="비밀번호를 다시 입력하세요" value={form.confirmPw} onChange={update('confirmPw')} />
+            <label>비밀번호 확인 <span style={{ color: '#2f54ff' }}>*</span></label>
+            <input type="password" placeholder="비밀번호를 다시 입력하세요" value={form.confirmPw} onChange={update('confirmPw')} autoComplete="new-password" />
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 14 }}>
             <div className="form-group" style={{ marginBottom: 0 }}>
               <label>생년월일</label>
               <input type="date" value={form.birthDate} max={new Date().toISOString().split('T')[0]} onChange={update('birthDate')} />
             </div>
-            <div className="form-group" style={{ marginBottom: 0 }}>
-              <label>성별</label>
-              <select value={form.gender} onChange={update('gender')}>
-                <option value="MALE">남성</option>
-                <option value="FEMALE">여성</option>
-              </select>
+            <div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: '#6b7385', marginBottom: 7 }}>성별</div>
+              <div style={{ display: 'flex', gap: 6, height: 48 }}>
+                {[{ val: 'MALE', label: '남성' }, { val: 'FEMALE', label: '여성' }].map(({ val, label }) => (
+                  <button
+                    key={val}
+                    type="button"
+                    onClick={() => setForm(p => ({ ...p, gender: val }))}
+                    style={{
+                      flex: 1, border: form.gender === val ? '1.5px solid #2f54ff' : '1px solid #eaecf2',
+                      borderRadius: 11, background: form.gender === val ? '#ecf0ff' : '#fff',
+                      color: form.gender === val ? '#2f54ff' : '#9aa1b2',
+                      fontSize: 14, fontWeight: form.gender === val ? 700 : 400,
+                      cursor: 'pointer', fontFamily: 'inherit',
+                    }}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
 
-          <div style={{ height: 20 }} />
           <button className="btn-primary" type="submit" disabled={loading}>
             {loading ? '처리 중...' : '회원가입 완료'}
           </button>
         </form>
 
-        <p style={{ textAlign: 'center', marginTop: 16, color: '#9e9e9e', fontSize: 14 }}>
+        <div style={{ textAlign: 'center', marginTop: 16, fontSize: 13, color: '#9aa1b2' }}>
           이미 계정이 있으신가요?{' '}
-          <Link to="/login" style={{ color: '#43a047', fontWeight: 600, textDecoration: 'none' }}>로그인</Link>
-        </p>
+          <Link to="/login" style={{ color: '#2f54ff', fontWeight: 700, textDecoration: 'none' }}>로그인</Link>
+        </div>
       </div>
     </div>
   );
