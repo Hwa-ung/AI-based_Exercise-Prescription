@@ -6,7 +6,7 @@ const AIService = {
   async generateWorkout(userData, completedHistory = null) {
     // 24시간 캐시: 같은 유저·목표·날짜면 호출 생략
     const today    = new Date().toISOString().split('T')[0];
-    const cacheKey = `wefit_ai_cache_${userData.userId || 'guest'}_${userData.goal}_${today}`;
+    const cacheKey = `wefit_ai_cache_${userData.userId || 'guest'}_${userData.goal}_${userData.availableDays}_${today}`;
     const cached   = StorageService.get(cacheKey);
     if (cached) return cached;
 
