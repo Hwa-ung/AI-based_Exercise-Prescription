@@ -1,0 +1,604 @@
+﻿<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="95271d68-2b2e-4ad9-800c-688de7a8056b"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<style>/* vietnamese */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("57aee948-a787-4394-9148-10a4f438644f") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("85e2b6f8-3ad8-484c-952e-e92a5c1a8f02") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("763176c3-d1f6-405b-97d7-ecaa47ffa55e") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("57aee948-a787-4394-9148-10a4f438644f") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("85e2b6f8-3ad8-484c-952e-e92a5c1a8f02") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("763176c3-d1f6-405b-97d7-ecaa47ffa55e") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("57aee948-a787-4394-9148-10a4f438644f") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("85e2b6f8-3ad8-484c-952e-e92a5c1a8f02") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("763176c3-d1f6-405b-97d7-ecaa47ffa55e") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("57aee948-a787-4394-9148-10a4f438644f") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("85e2b6f8-3ad8-484c-952e-e92a5c1a8f02") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("763176c3-d1f6-405b-97d7-ecaa47ffa55e") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<style>/**
+ * Minified by jsDelivr using clean-css v5.3.3.
+ * Original file: /gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable.css
+ *
+ * Do NOT use SRI with dynamically generated files! More information: https://www.jsdelivr.com/using-sri-with-dynamic-files
+ */
+@font-face{font-family:'Pretendard Variable';font-weight:45 920;font-style:normal;font-display:swap;src:url("524d7b76-6cca-4bd9-8922-226d743d6e4f") format('woff2-variations')}
+/*# sourceMappingURL=/sm/cb46c7e49fc38cbd97a389d4dc69706f7471d0646edc67e9dc7defe084c0b8bf.map */</style>
+<style>
+  *{box-sizing:border-box;}
+  body{margin:0;background:#e7e5df;-webkit-font-smoothing:antialiased;font-family:'Pretendard Variable',Pretendard,-apple-system,sans-serif;}
+  ::-webkit-scrollbar{height:10px;width:10px;}
+  ::-webkit-scrollbar-thumb{background:rgba(0,0,0,0.18);border-radius:5px;}
+</style>
+</helmet>
+
+<div style="width:max-content;min-width:100%;min-height:100vh;background:#e7e5df;padding:56px 56px 80px;box-sizing:border-box;">
+
+  <!-- ===== PAGE TITLE ===== -->
+  <div style="max-width:1180px;margin-bottom:6px;">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+      <div style="width:22px;height:22px;border-radius:6px;background:#2f54ff;"></div>
+      <span style="font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;letter-spacing:2px;color:#2f54ff;text-transform:uppercase;">WeFitAI 쨌 Style C ??EDGE</span>
+    </div>
+    <h1 style="margin:0;font-size:40px;font-weight:800;letter-spacing:-1.2px;color:#1c1b18;line-height:1.05;">肄붾컻??쨌 ?ㅽ봽 &amp; 誘몃땲硫 ???꾩껜 ?붾㈃</h1>
+    <p style="margin:14px 0 0;font-size:16px;line-height:1.6;color:#65625b;max-width:720px;">?붿씠??踰좎씠??+ 肄붾컻??#2F54FF) ?⑥씪 ?ъ씤?? ?뉗? ?ㅼ뼱?쇱씤, ?됰꼮???щ갚, ?곗씠??以묒떖 ?덉씠?꾩썐. Space&nbsp;Grotesk ?レ옄 + Pretendard 蹂몃Ц. 7媛??붾㈃ ?꾩껜?낅땲??</p>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- ONBOARDING -->
+  <!-- ============================================================ -->
+  <div style="display:flex;align-items:baseline;gap:14px;margin:52px 0 24px;">
+    <div style="font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;color:#2f54ff;">01??2</div>
+    <h2 style="margin:0;font-size:22px;font-weight:800;letter-spacing:-0.5px;color:#1c1b18;">?⑤낫??쨌 吏꾩엯</h2>
+    <span style="font-size:14px;color:#807d76;">濡쒓렇??쨌 ?뚯썝媛??/span>
+  </div>
+
+  <div style="display:flex;gap:48px;align-items:flex-start;">
+
+    <!-- ========== 1. LOGIN ========== -->
+    <div style="flex:none;width:340px;">
+      <div style="font-size:13px;font-weight:600;color:#56534c;margin-bottom:14px;">??濡쒓렇??/div>
+      <div style="width:340px;height:740px;background:#fff;border-radius:44px;overflow:hidden;box-shadow:0 28px 64px rgba(20,20,40,0.20),0 4px 12px rgba(0,0,0,0.06);display:flex;flex-direction:column;border:1px solid rgba(0,0,0,0.05);">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:15px 26px 4px;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;color:#0e1525;">
+          <span>9:41</span>
+          <div style="display:flex;align-items:flex-end;gap:5px;"><div style="display:flex;gap:2px;align-items:flex-end;height:11px;"><div style="width:3px;height:5px;background:#0e1525;border-radius:1px;"></div><div style="width:3px;height:7px;background:#0e1525;border-radius:1px;"></div><div style="width:3px;height:9px;background:#0e1525;border-radius:1px;"></div><div style="width:3px;height:11px;background:#0e1525;border-radius:1px;"></div></div><div style="width:22px;height:11px;border:1.5px solid #0e1525;border-radius:3px;padding:1.5px;"><div style="width:70%;height:100%;background:#0e1525;border-radius:1px;"></div></div></div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;padding:0 28px;">
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div style="width:60px;height:60px;border-radius:16px;background:#2f54ff;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:30px;color:#fff;box-shadow:0 10px 24px rgba(47,84,255,0.3);">W</div>
+            <div style="font-family:'Space Grotesk',sans-serif;font-size:32px;font-weight:700;letter-spacing:-1px;color:#0e1525;margin-top:24px;">WeFitAI</div>
+            <div style="font-size:15px;color:#6b7385;margin-top:8px;line-height:1.5;">?곗씠?곕줈 ?ㅺ퀎?섎뒗<br>?섎쭔???대룞 泥섎갑.</div>
+          </div>
+          <div style="padding-bottom:40px;">
+            <div style="font-size:12px;font-weight:600;color:#6b7385;margin-bottom:7px;">?꾩씠??/div>
+            <div style="height:50px;border:1px solid #eaecf2;border-radius:11px;display:flex;align-items:center;padding:0 15px;font-size:14px;color:#c2c7d2;margin-bottom:14px;">?꾩씠?붾? ?낅젰?섏꽭??/div>
+            <div style="font-size:12px;font-weight:600;color:#6b7385;margin-bottom:7px;">鍮꾨?踰덊샇</div>
+            <div style="height:50px;border:1.5px solid #2f54ff;border-radius:11px;display:flex;align-items:center;padding:0 15px;font-size:14px;color:#0e1525;margin-bottom:22px;box-shadow:0 0 0 3px rgba(47,84,255,0.10);">?™™™™™™™?/div>
+            <button style="width:100%;border:none;background:#2f54ff;color:#fff;font-family:'Pretendard Variable',sans-serif;font-weight:700;font-size:16px;padding:15px;border-radius:11px;cursor:pointer;">濡쒓렇??/button>
+            <div style="text-align:center;margin-top:18px;font-size:13px;color:#9aa1b2;">怨꾩젙???놁쑝?좉??? <span style="color:#2f54ff;font-weight:700;">?뚯썝媛??/span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 2. SIGNUP ========== -->
+    <div style="flex:none;width:340px;">
+      <div style="font-size:13px;font-weight:600;color:#56534c;margin-bottom:14px;">???뚯썝媛??/div>
+      <div style="width:340px;height:740px;background:#fff;border-radius:44px;overflow:hidden;box-shadow:0 28px 64px rgba(20,20,40,0.20),0 4px 12px rgba(0,0,0,0.06);display:flex;flex-direction:column;border:1px solid rgba(0,0,0,0.05);">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:15px 26px 4px;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;color:#0e1525;">
+          <span>9:41</span>
+          <div style="display:flex;align-items:flex-end;gap:5px;"><div style="display:flex;gap:2px;align-items:flex-end;height:11px;"><div style="width:3px;height:5px;background:#0e1525;border-radius:1px;"></div><div style="width:3px;height:7px;background:#0e1525;border-radius:1px;"></div><div style="width:3px;height:9px;background:#0e1525;border-radius:1px;"></div><div style="width:3px;height:11px;background:#0e1525;border-radius:1px;"></div></div><div style="width:22px;height:11px;border:1.5px solid #0e1525;border-radius:3px;padding:1.5px;"><div style="width:70%;height:100%;background:#0e1525;border-radius:1px;"></div></div></div>
+        </div>
+        <div style="flex:1;overflow:hidden;padding:14px 28px 0;">
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:24px;">
+            <div style="width:34px;height:34px;border-radius:10px;border:1px solid #eaecf2;display:flex;align-items:center;justify-content:center;color:#6b7385;font-size:18px;">??/div>
+            <div style="font-size:22px;font-weight:700;letter-spacing:-0.5px;color:#0e1525;">?뚯썝媛??/div>
+          </div>
+          <div style="font-size:12px;font-weight:600;color:#6b7385;margin-bottom:7px;">?대쫫 <span style="color:#2f54ff;">*</span></div>
+          <div style="height:48px;border:1px solid #eaecf2;border-radius:11px;display:flex;align-items:center;padding:0 15px;font-size:14px;color:#c2c7d2;margin-bottom:14px;">?대쫫???낅젰?섏꽭??/div>
+          <div style="font-size:12px;font-weight:600;color:#6b7385;margin-bottom:7px;">?꾩씠??<span style="color:#2f54ff;">*</span></div>
+          <div style="height:48px;border:1px solid #eaecf2;border-radius:11px;display:flex;align-items:center;padding:0 15px;font-size:14px;color:#c2c7d2;margin-bottom:14px;">?곷Ц+?レ옄, 4???댁긽</div>
+          <div style="font-size:12px;font-weight:600;color:#6b7385;margin-bottom:7px;">鍮꾨?踰덊샇 <span style="color:#2f54ff;">*</span></div>
+          <div style="height:48px;border:1px solid #eaecf2;border-radius:11px;display:flex;align-items:center;padding:0 15px;font-size:14px;color:#c2c7d2;margin-bottom:14px;">6???댁긽</div>
+          <div style="font-size:12px;font-weight:600;color:#6b7385;margin-bottom:7px;">鍮꾨?踰덊샇 ?뺤씤 <span style="color:#2f54ff;">*</span></div>
+          <div style="height:48px;border:1px solid #eaecf2;border-radius:11px;display:flex;align-items:center;padding:0 15px;font-size:14px;color:#c2c7d2;margin-bottom:14px;">鍮꾨?踰덊샇瑜??ㅼ떆 ?낅젰?섏꽭??/div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            <div><div style="font-size:12px;font-weight:600;color:#6b7385;margin-bottom:7px;">?앸뀈?붿씪</div><div style="height:48px;border:1px solid #eaecf2;border-radius:11px;display:flex;align-items:center;padding:0 15px;font-size:14px;color:#0e1525;">1996-04-12</div></div>
+            <div><div style="font-size:12px;font-weight:600;color:#6b7385;margin-bottom:7px;">?깅퀎</div>
+              <div style="display:flex;gap:6px;height:48px;">
+                <div style="flex:1;border:1.5px solid #2f54ff;background:#ecf0ff;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;color:#2f54ff;">?⑥꽦</div>
+                <div style="flex:1;border:1px solid #eaecf2;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#9aa1b2;">?ъ꽦</div>
+              </div>
+            </div>
+          </div>
+          <button style="width:100%;border:none;background:#2f54ff;color:#fff;font-family:'Pretendard Variable',sans-serif;font-weight:700;font-size:16px;padding:15px;border-radius:11px;cursor:pointer;margin-top:22px;">?뚯썝媛???꾨즺</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- MAIN -->
+  <!-- ============================================================ -->
+  <div style="display:flex;align-items:baseline;gap:14px;margin:64px 0 24px;">
+    <div style="font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;color:#2f54ff;">03??5</div>
+    <h2 style="margin:0;font-size:22px;font-weight:800;letter-spacing:-0.5px;color:#1c1b18;">硫붿씤 쨌 ?쇱씪 ?ъ슜</h2>
+    <span style="font-size:14px;color:#807d76;">??쨌 ?좎껜?뺣낫 ?낅젰 쨌 ?대룞泥섎갑</span>
+  </div>
+
+  <div style="display:flex;gap:48px;align-items:flex-start;">
+
+    <!-- ========== 3. HOME ========== -->
+    <div style="flex:none;width:340px;">
+      <div style="font-size:13px;font-weight:600;color:#56534c;margin-bottom:14px;">????/div>
+      <div style="width:340px;height:740px;background:#fff;border-radius:44px;overflow:hidden;box-shadow:0 28px 64px rgba(20,20,40,0.20),0 4px 12px rgba(0,0,0,0.06);display:flex;flex-direction:column;border:1px solid rgba(0,0,0,0.05);">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:15px 26px 4px;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;color:#0e1525;">
+          <span>9:41</span>
+          <div style="display:flex;align-items:flex-end;gap:5px;"><div style="display:flex;gap:2px;align-items:flex-end;height:11px;"><div style="width:3px;height:5px;background:#0e1525;border-radius:1px;"></div><div style="width:3px;height:7px;background:#0e1525;border-radius:1px;"></div><div style="width:3px;height:9px;background:#0e1525;border-radius:1px;"></div><div style="width:3px;height:11px;background:#0e1525;border-radius:1px;"></div></div><div style="width:22px;height:11px;border:1.5px solid #0e1525;border-radius:3px;padding:1.5px;"><div style="width:70%;height:100%;background:#0e1525;border-radius:1px;"></div></div></div>
+        </div>
+        <div style="flex:1;overflow:hidden;padding:14px 22px 0;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div style="width:26px;height:26px;border-radius:8px;background:#2f54ff;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;color:#fff;">W</div>
+              <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;letter-spacing:-0.5px;color:#0e1525;">WeFitAI</span>
+            </div>
+            <div style="width:38px;height:38px;border-radius:10px;border:1px solid #eaecf2;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><div style="width:16px;height:16px;border:1.5px solid #6b7385;border-radius:50%;"></div></div>
+          </div>
+          <div style="margin-bottom:18px;">
+            <div style="font-size:13px;color:#6b7385;">2026??6??18???섏슂??/div>
+            <div style="font-size:21px;font-weight:700;letter-spacing:-0.5px;color:#0e1525;margin-top:2px;">?덈뀞?섏꽭?? 誘쇱???/div>
+          </div>
+          <div style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:1.5px;color:#2f54ff;text-transform:uppercase;margin-bottom:10px;">?ㅻ뒛??異붿쿇 쨌 AI</div>
+          <div style="border:1px solid #eaecf2;border-radius:14px;padding:20px;">
+            <div style="font-size:22px;font-weight:700;letter-spacing:-0.5px;color:#0e1525;">媛??쨌 ?쇰몢 吏묒쨷</div>
+            <div style="font-size:13px;color:#6b7385;margin-top:5px;">?몄떆 ?곗씠 쨌 5媛?醫낅ぉ 쨌 洹쇰젰 ?곸듅</div>
+            <div style="display:flex;gap:22px;margin-top:18px;padding-top:16px;border-top:1px solid #f1f3f8;">
+              <div><div style="font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:700;color:#0e1525;">48<span style="font-size:12px;color:#9aa1b2;font-weight:500;">遺?/span></div><div style="font-size:11px;color:#9aa1b2;margin-top:1px;">?덉긽 ?쒓컙</div></div>
+              <div><div style="font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:700;color:#0e1525;">5</div><div style="font-size:11px;color:#9aa1b2;margin-top:1px;">醫낅ぉ</div></div>
+              <div><div style="font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:700;color:#0e1525;">420<span style="font-size:12px;color:#9aa1b2;font-weight:500;">kcal</span></div><div style="font-size:11px;color:#9aa1b2;margin-top:1px;">?뚮え ?덉긽</div></div>
+            </div>
+            <button style="margin-top:18px;width:100%;border:none;background:#2f54ff;color:#fff;font-family:'Pretendard Variable',sans-serif;font-weight:700;font-size:15px;padding:14px;border-radius:11px;cursor:pointer;">?대룞 ?쒖옉?섍린</button>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin:24px 2px 12px;">
+            <span style="font-size:14px;font-weight:700;color:#0e1525;">?좎껜 遺꾩꽍</span>
+            <span style="font-size:12px;color:#9aa1b2;">3??????/span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+            <div style="border:1px solid #eaecf2;border-radius:14px;padding:15px;"><div style="display:flex;align-items:baseline;gap:7px;"><span style="font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:700;color:#0e1525;letter-spacing:-1px;">22.4</span><span style="font-size:11px;font-weight:600;color:#2f54ff;">?뺤긽</span></div><div style="font-size:12px;color:#9aa1b2;margin-top:3px;">BMI</div></div>
+            <div style="border:1px solid #eaecf2;border-radius:14px;padding:15px;"><div style="font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:700;color:#0e1525;letter-spacing:-1px;">70.2</div><div style="font-size:12px;color:#9aa1b2;margin-top:3px;">泥댁쨷 kg</div></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+            <div style="border:1px solid #eaecf2;border-radius:14px;padding:13px 10px;"><div style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;color:#0e1525;">17.8<span style="font-size:10px;color:#9aa1b2;">%</span></div><div style="font-size:10px;color:#9aa1b2;margin-top:2px;">泥댁?諛?/div></div>
+            <div style="border:1px solid #eaecf2;border-radius:14px;padding:13px 10px;"><div style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;color:#0e1525;">80<span style="font-size:10px;color:#9aa1b2;">cm</span></div><div style="font-size:10px;color:#9aa1b2;margin-top:2px;">?덈━?섎젅</div></div>
+            <div style="border:1px solid #eaecf2;border-radius:14px;padding:13px 10px;"><div style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;color:#0e1525;">42<span style="font-size:10px;color:#9aa1b2;">kg</span></div><div style="font-size:10px;color:#9aa1b2;margin-top:2px;">?낅젰</div></div>
+          </div>
+        </div>
+        <div style="display:flex;border-top:1px solid #eaecf2;background:#fff;padding:10px 4px 13px;">
+          <div style="flex:1;text-align:center;"><span style="font-size:11px;font-weight:700;color:#2f54ff;">??/span></div>
+          <div style="flex:1;text-align:center;"><span style="font-size:11px;font-weight:500;color:#9aa1b2;">?좎껜</span></div>
+          <div style="flex:1;text-align:center;"><span style="font-size:11px;font-weight:500;color:#9aa1b2;">泥섎갑</span></div>
+          <div style="flex:1;text-align:center;"><span style="font-size:11px;font-weight:500;color:#9aa1b2;">?꾧컧</span></div>
+          <div style="flex:1;text-align:center;"><span style="font-size:11px;font-weight:500;color:#9aa1b2;">湲곕줉</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 4. BODY INPUT ========== -->
+    <div style="flex:none;width:340px;">
+      <div style="font-size:13px;font-weight:600;color:#56534c;margin-bottom:14px;">???좎껜?뺣낫 ?낅젰</div>
+      <div style="width:340px;height:740px;background:#fff;border-radius:44px;overflow:hidden;box-shadow:0 28px 64px rgba(20,20,40,0.20),0 4px 12px rgba(0,0,0,0.06);display:flex;flex-direction:column;border:1px solid rgba(0,0,0,0.05);">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:15px 26px 4px;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;color:#0e1525;">
+          <span>9:41</span>
+          <div style="display:flex;align-items:flex-end;gap:5px;"><div style="display:flex;gap:2px;align-items:flex-end;height:11px;"><div style="width:3px;height:5px;background:#0e1525;border-radius:1px;"></div><div style="width:3px;height:7px;background:#0e1525;border-radius:1px;"></div><div style="width:3px;height:9px;background:#0e1525;border-radius:1px;"></div><div style="width:3px;height:11px;background:#0e1525;border-radius:1px;"></div></div><div style="width:22px;height:11px;border:1.5px solid #0e1525;border-radius:3px;padding:1.5px;"><div style="width:70%;height:100%;background:#0e1525;border-radius:1px;"></div></div></div>
+        </div>
+        <div style="flex:1;overflow:hidden;padding:14px 22px 0;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+            <div style="width:26px;height:26px;border-radius:8px;background:#2f54ff;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;color:#fff;">W</div>
+            <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;letter-spacing:-0.5px;color:#0e1525;">WeFitAI</span>
+            <span style="font-size:13px;color:#9aa1b2;margin-left:auto;">?좎껜?뺣낫 ?낅젰</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+            <div><div style="font-size:12px;font-weight:600;color:#6b7385;margin-bottom:7px;">?좎옣 (cm) <span style="color:#2f54ff;">*</span></div><div style="height:48px;border:1px solid #eaecf2;border-radius:11px;display:flex;align-items:center;padding:0 15px;font-family:'Space Grotesk',sans-serif;font-size:15px;color:#0e1525;">177</div></div>
+            <div><div style="font-size:12px;font-weight:600;color:#6b7385;margin-bottom:7px;">泥댁쨷 (kg) <span style="color:#2f54ff;">*</span></div><div style="height:48px;border:1px solid #eaecf2;border-radius:11px;display:flex;align-items:center;padding:0 15px;font-family:'Space Grotesk',sans-serif;font-size:15px;color:#0e1525;">70.2</div></div>
+          </div>
+          <div style="font-size:12px;color:#9aa1b2;margin-bottom:9px;">?좏깮 ?낅젰 ?????뺣???遺꾩꽍???쒖슜?⑸땲??/div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:18px;">
+            <div><div style="font-size:11px;font-weight:600;color:#6b7385;margin-bottom:6px;">泥댁?諛?%</div><div style="height:46px;border:1px solid #eaecf2;border-radius:11px;display:flex;align-items:center;padding:0 12px;font-family:'Space Grotesk',sans-serif;font-size:14px;color:#0e1525;">17.8</div></div>
+            <div><div style="font-size:11px;font-weight:600;color:#6b7385;margin-bottom:6px;">?덈━ cm</div><div style="height:46px;border:1px solid #eaecf2;border-radius:11px;display:flex;align-items:center;padding:0 12px;font-family:'Space Grotesk',sans-serif;font-size:14px;color:#0e1525;">80</div></div>
+            <div><div style="font-size:11px;font-weight:600;color:#6b7385;margin-bottom:6px;">?낅젰 kg</div><div style="height:46px;border:1px solid #eaecf2;border-radius:11px;display:flex;align-items:center;padding:0 12px;font-family:'Space Grotesk',sans-serif;font-size:14px;color:#0e1525;">42</div></div>
+          </div>
+          <button style="width:100%;border:none;background:#2f54ff;color:#fff;font-family:'Pretendard Variable',sans-serif;font-weight:700;font-size:15px;padding:14px;border-radius:11px;cursor:pointer;margin-bottom:18px;">BMI 遺꾩꽍?섍린</button>
+          <!-- result -->
+          <div style="border:1px solid #eaecf2;border-radius:14px;padding:18px;">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;">
+              <div style="display:flex;align-items:baseline;gap:9px;"><span style="font-family:'Space Grotesk',sans-serif;font-size:36px;font-weight:700;letter-spacing:-1.5px;color:#0e1525;line-height:0.9;">22.4</span><span style="font-size:12px;color:#6b7385;">BMI</span></div>
+              <span style="font-size:11px;font-weight:700;background:#ecf0ff;color:#2f54ff;padding:4px 10px;border-radius:8px;">?뺤긽</span>
+            </div>
+            <div style="display:flex;gap:6px;margin-bottom:14px;">
+              <div style="flex:1;font-size:10px;text-align:center;color:#9aa1b2;padding:5px 0;border-radius:7px;background:#f7f8fb;">?泥댁쨷</div>
+              <div style="flex:1;font-size:10px;text-align:center;color:#fff;font-weight:700;padding:5px 0;border-radius:7px;background:#2f54ff;">?뺤긽</div>
+              <div style="flex:1;font-size:10px;text-align:center;color:#9aa1b2;padding:5px 0;border-radius:7px;background:#f7f8fb;">怨쇱껜以?/div>
+              <div style="flex:1;font-size:10px;text-align:center;color:#9aa1b2;padding:5px 0;border-radius:7px;background:#f7f8fb;">鍮꾨쭔</div>
+            </div>
+            <div style="background:#f7f8fb;border-radius:11px;padding:12px 14px;font-size:13px;color:#4a5163;line-height:1.6;">?쒖? 泥댁쨷 踰붿쐞?덉슂. 洹쇰젰 ?곸듅 紐⑺몴?쇰㈃ ?⑤갚吏???랬? ?먯쭊??怨쇰??섏뿉 吏묒쨷?섏꽭??</div>
+          </div>
+        </div>
+        <div style="display:flex;border-top:1px solid #eaecf2;background:#fff;padding:10px 4px 13px;">
+          <div style="flex:1;text-align:center;"><span style="font-size:11px;font-weight:500;color:#9aa1b2;">??/span></div>
+          <div style="flex:1;text-align:center;"><span style="font-size:11px;font-weight:700;color:#2f54ff;">?좎껜</span></div>
+          <div style="flex:1;text-align:center;"><span style="font-size:11px;font-weight:500;color:#9aa1b2;">泥섎갑</span></div>
+          <div style="flex:1;text-align:center;"><span style="font-size:11px;font-weight:500;color:#9aa1b2;">?꾧컧</span></div>
+          <div style="flex:1;text-align:center;"><span style="font-size:11px;font-weight:500;color:#9aa1b2;">湲곕줉</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 5. WORKOUT ========== -->
+    <div style="flex:none;width:340px;">
+      <div style="font-size:13px;font-weight:600;color:#56534c;margin-bottom:14px;">???대룞泥섎갑 (AI)</div>
+      <div style="width:340px;height:740px;background:#fff;border-radius:44px;overflow:hidden;box-shadow:0 28px 64px rgba(20,20,40,0.20),0 4px 12px rgba(0,0,0,0.06);display:flex;flex-direction:column;border:1px solid rgba(0,0,0,0.05);">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:15px 26px 4px;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;color:#0e1525;">
+          <span>9:41</span>
+          <div style="display:flex;align-items:flex-end;gap:5px;"><div style="display:flex;gap:2px;align-items:flex-end;height:11px;"><div style="width:3px;height:5px;background:#0e1525;border-radius:1px;"></div><div style="width:3px;height:7px;background:#0e1525;border-radius:1px;"></div><div style="width:3px;height:9px;background:#0e1525;border-radius:1px;"></div><div style="width:3px;height:11px;background:#0e1525;border-radius:1px;"></div></div><div style="width:22px;height:11px;border:1.5px solid #0e1525;border-radius:3px;padding:1.5px;"><div style="width:70%;height:100%;background:#0e1525;border-radius:1px;"></div></div></div>
+        </div>
+        <div style="flex:1;overflow:hidden;padding:14px 22px 0;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+            <div style="width:26px;height:26px;border-radius:8px;background:#2f54ff;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;color:#fff;">W</div>
+            <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;letter-spacing:-0.5px;color:#0e1525;">WeFitAI</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+            <div style="font-size:18px;font-weight:700;letter-spacing:-0.4px;color:#0e1525;">?대룞 泥섎갑</div>
+            <div style="display:flex;gap:6px;">
+              <div style="font-size:11px;font-weight:700;border:1.5px solid #2f54ff;color:#2f54ff;background:#ecf0ff;padding:6px 11px;border-radius:9px;">洹쇰젰 ?곸듅</div>
+              <div style="font-size:11px;font-weight:500;border:1px solid #eaecf2;color:#9aa1b2;padding:6px 11px;border-radius:9px;">5??/div>
+            </div>
+          </div>
+          <div style="display:flex;gap:5px;margin-bottom:20px;border-bottom:1px solid #eaecf2;padding-bottom:2px;">
+            <div style="flex:1;text-align:center;padding:8px 0;font-size:14px;font-weight:700;color:#2f54ff;border-bottom:2px solid #2f54ff;margin-bottom:-2px;">??/div>
+            <div style="flex:1;text-align:center;padding:8px 0;font-size:14px;color:#6b7385;">??/div>
+            <div style="flex:1;text-align:center;padding:8px 0;font-size:14px;color:#c2c7d2;">??/div>
+            <div style="flex:1;text-align:center;padding:8px 0;font-size:14px;color:#6b7385;">紐?/div>
+            <div style="flex:1;text-align:center;padding:8px 0;font-size:14px;color:#6b7385;">湲?/div>
+            <div style="flex:1;text-align:center;padding:8px 0;font-size:14px;color:#c2c7d2;">??/div>
+            <div style="flex:1;text-align:center;padding:8px 0;font-size:14px;color:#c2c7d2;">??/div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;">
+            <span style="font-size:18px;font-weight:700;color:#0e1525;letter-spacing:-0.4px;">媛??<span style="color:#c2c7d2;font-weight:400;">/ Push</span></span>
+            <span style="font-size:12px;color:#9aa1b2;">4 醫낅ぉ 쨌 48遺?/span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid #f1f3f8;">
+            <div style="display:flex;align-items:center;gap:14px;"><span style="font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;color:#c2c7d2;width:18px;">01</span><span style="font-weight:600;font-size:15px;color:#0e1525;">踰ㅼ튂?꾨젅??/span></div>
+            <span style="font-family:'Space Grotesk',sans-serif;font-size:13px;color:#6b7385;">4횞8</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid #f1f3f8;">
+            <div style="display:flex;align-items:center;gap:14px;"><span style="font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;color:#c2c7d2;width:18px;">02</span><span style="font-weight:600;font-size:15px;color:#0e1525;">?명겢?쇱씤 ?ㅻ꺼?꾨젅??/span></div>
+            <span style="font-family:'Space Grotesk',sans-serif;font-size:13px;color:#6b7385;">3횞10</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid #f1f3f8;">
+            <div style="display:flex;align-items:center;gap:14px;"><span style="font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;color:#c2c7d2;width:18px;">03</span><span style="font-weight:600;font-size:15px;color:#0e1525;">耳?대툝 ?뚮씪??/span></div>
+            <span style="font-family:'Space Grotesk',sans-serif;font-size:13px;color:#6b7385;">3횞12</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid #f1f3f8;">
+            <div style="display:flex;align-items:center;gap:14px;"><span style="font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;color:#c2c7d2;width:18px;">04</span><span style="font-weight:600;font-size:15px;color:#0e1525;">?몃씪?댁뀎???몄떆?ㅼ슫</span></div>
+            <span style="font-family:'Space Grotesk',sans-serif;font-size:13px;color:#6b7385;">3횞15</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 0;">
+            <div style="display:flex;align-items:center;gap:14px;"><span style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#2f54ff;width:18px;">+</span><span style="font-weight:600;font-size:15px;color:#0e1525;">?좎궛??쨌 ?몃젅?쒕?</span></div>
+            <span style="font-family:'Space Grotesk',sans-serif;font-size:13px;color:#6b7385;">15遺?/span>
+          </div>
+        </div>
+        <div style="display:flex;border-top:1px solid #eaecf2;background:#fff;padding:10px 4px 13px;">
+          <div style="flex:1;text-align:center;"><span style="font-size:11px;font-weight:500;color:#9aa1b2;">??/span></div>
+          <div style="flex:1;text-align:center;"><span style="font-size:11px;font-weight:500;color:#9aa1b2;">?좎껜</span></div>
+          <div style="flex:1;text-align:center;"><span style="font-size:11px;font-weight:700;color:#2f54ff;">泥섎갑</span></div>
+          <div style="flex:1;text-align:center;"><span style="font-size:11px;font-weight:500;color:#9aa1b2;">?꾧컧</span></div>
+          <div style="flex:1;text-align:center;"><span style="font-size:11px;font-weight:500;color:#9aa1b2;">湲곕줉</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- RECORDS & EXPLORE -->
+  <!-- ============================================================ -->
+  <div style="display:flex;align-items:baseline;gap:14px;margin:64px 0 24px;">
+    <div style="font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;color:#2f54ff;">06??7</div>
+    <h2 style="margin:0;font-size:22px;font-weight:800;letter-spacing:-0.5px;color:#1c1b18;">湲곕줉 &amp; ?먯깋</h2>
+    <span style="font-size:14px;color:#807d76;">罹섎┛???대룞湲곕줉) 쨌 ?대룞?꾧컧</span>
+  </div>
+
+  <div style="display:flex;gap:48px;align-items:flex-start;">
+
+    <!-- ========== 6. CALENDAR / HISTORY ========== -->
+    <div style="flex:none;width:340px;">
+      <div style="font-size:13px;font-weight:600;color:#56534c;margin-bottom:14px;">??罹섎┛??쨌 ?대룞湲곕줉</div>
+      <div style="width:340px;height:740px;background:#fff;border-radius:44px;overflow:hidden;box-shadow:0 28px 64px rgba(20,20,40,0.20),0 4px 12px rgba(0,0,0,0.06);display:flex;flex-direction:column;border:1px solid rgba(0,0,0,0.05);">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:15px 26px 4px;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;color:#0e1525;">
+          <span>9:41</span>
+          <div style="display:flex;align-items:flex-end;gap:5px;"><div style="display:flex;gap:2px;align-items:flex-end;height:11px;"><div style="width:3px;height:5px;background:#0e1525;border-radius:1px;"></div><div style="width:3px;height:7px;background:#0e1525;border-radius:1px;"></div><div style="width:3px;height:9px;background:#0e1525;border-radius:1px;"></div><div style="width:3px;height:11px;background:#0e1525;border-radius:1px;"></div></div><div style="width:22px;height:11px;border:1.5px solid #0e1525;border-radius:3px;padding:1.5px;"><div style="width:70%;height:100%;background:#0e1525;border-radius:1px;"></div></div></div>
+        </div>
+        <div style="flex:1;overflow:hidden;padding:14px 22px 0;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+            <div style="width:26px;height:26px;border-radius:8px;background:#2f54ff;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;color:#fff;">W</div>
+            <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;letter-spacing:-0.5px;color:#0e1525;">WeFitAI</span>
+            <span style="font-size:13px;color:#9aa1b2;margin-left:auto;">湲곕줉</span>
+          </div>
+          <!-- tab toggle -->
+          <div style="display:flex;background:#f7f8fb;border-radius:11px;padding:4px;margin-bottom:18px;">
+            <div style="flex:1;text-align:center;padding:8px 0;font-size:13px;color:#6b7385;border-radius:8px;">?좎껜湲곕줉</div>
+            <div style="flex:1;text-align:center;padding:8px 0;font-size:13px;font-weight:700;color:#0e1525;background:#fff;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.08);">?대룞 罹섎┛??/div>
+          </div>
+          <!-- month nav -->
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+            <span style="color:#9aa1b2;font-size:18px;">??/span>
+            <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;color:#0e1525;">2026??6??/span>
+            <span style="color:#9aa1b2;font-size:18px;">??/span>
+          </div>
+          <!-- weekday header -->
+          <div style="display:grid;grid-template-columns:repeat(7,1fr);margin-bottom:6px;">
+            <div style="text-align:center;font-size:11px;font-weight:600;color:#e5484d;">??/div>
+            <div style="text-align:center;font-size:11px;font-weight:600;color:#9aa1b2;">??/div>
+            <div style="text-align:center;font-size:11px;font-weight:600;color:#9aa1b2;">??/div>
+            <div style="text-align:center;font-size:11px;font-weight:600;color:#9aa1b2;">??/div>
+            <div style="text-align:center;font-size:11px;font-weight:600;color:#9aa1b2;">紐?/div>
+            <div style="text-align:center;font-size:11px;font-weight:600;color:#9aa1b2;">湲?/div>
+            <div style="text-align:center;font-size:11px;font-weight:600;color:#2f54ff;">??/div>
+          </div>
+          <!-- date grid (June 2026 starts Monday) -->
+          <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;font-family:'Space Grotesk',sans-serif;">
+            <div></div>
+            <div style="height:38px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:13px;color:#0e1525;">1<div style="width:4px;height:4px;border-radius:50%;background:#2f54ff;margin-top:2px;"></div></div>
+            <div style="height:38px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#0e1525;">2</div>
+            <div style="height:38px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:13px;color:#0e1525;">3<div style="width:4px;height:4px;border-radius:50%;background:#2f54ff;margin-top:2px;"></div></div>
+            <div style="height:38px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:13px;color:#0e1525;">4<div style="width:4px;height:4px;border-radius:50%;background:#2f54ff;margin-top:2px;"></div></div>
+            <div style="height:38px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#0e1525;">5</div>
+            <div style="height:38px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#2f54ff;">6</div>
+            <div style="height:38px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#e5484d;">7</div>
+            <div style="height:38px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:13px;color:#0e1525;">8<div style="width:4px;height:4px;border-radius:50%;background:#2f54ff;margin-top:2px;"></div></div>
+            <div style="height:38px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#0e1525;">9</div>
+            <div style="height:38px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:13px;color:#0e1525;">10<div style="width:4px;height:4px;border-radius:50%;background:#2f54ff;margin-top:2px;"></div></div>
+            <div style="height:38px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:13px;color:#0e1525;">11<div style="width:4px;height:4px;border-radius:50%;background:#2f54ff;margin-top:2px;"></div></div>
+            <div style="height:38px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#0e1525;">12</div>
+            <div style="height:38px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#2f54ff;">13</div>
+            <div style="height:38px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#e5484d;">14</div>
+            <div style="height:38px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:13px;color:#0e1525;">15<div style="width:4px;height:4px;border-radius:50%;background:#2f54ff;margin-top:2px;"></div></div>
+            <div style="height:38px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:13px;color:#0e1525;">16<div style="width:4px;height:4px;border-radius:50%;background:#2f54ff;margin-top:2px;"></div></div>
+            <div style="height:38px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#0e1525;">17</div>
+            <div style="height:38px;display:flex;align-items:center;justify-content:center;"><div style="width:30px;height:30px;border-radius:50%;background:#2f54ff;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;">18</div></div>
+            <div style="height:38px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#0e1525;">19</div>
+            <div style="height:38px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#2f54ff;">20</div>
+            <div style="height:38px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#e5484d;">21</div>
+            <div style="height:38px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#c2c7d2;">22</div>
+            <div style="height:38px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#c2c7d2;">23</div>
+            <div style="height:38px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#c2c7d2;">24</div>
+            <div style="height:38px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#c2c7d2;">25</div>
+            <div style="height:38px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#c2c7d2;">26</div>
+            <div style="height:38px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#c2c7d2;">27</div>
+            <div style="height:38px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#c2c7d2;">28</div>
+          </div>
+          <!-- selected day list -->
+          <div style="margin-top:18px;border-top:1px solid #eaecf2;padding-top:16px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+              <span style="font-size:15px;font-weight:700;color:#0e1525;">?ㅻ뒛 쨌 6??18??/span>
+              <span style="font-size:12px;font-weight:700;color:#2f54ff;">+ ?대룞 異붽?</span>
+            </div>
+            <div style="font-size:12px;color:#9aa1b2;margin-bottom:10px;">2 / 4 ?꾨즺</div>
+            <div style="height:5px;background:#f1f3f8;border-radius:3px;margin-bottom:14px;overflow:hidden;"><div style="height:100%;width:50%;background:#2f54ff;border-radius:3px;"></div></div>
+            <div style="display:flex;align-items:center;gap:12px;padding:9px 0;">
+              <div style="width:22px;height:22px;border-radius:7px;background:#2f54ff;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;flex-shrink:0;">??/div>
+              <div style="flex:1;"><div style="font-size:14px;color:#9aa1b2;text-decoration:line-through;">踰ㅼ튂?꾨젅??/div></div>
+              <span style="font-family:'Space Grotesk',sans-serif;font-size:12px;color:#c2c7d2;">4횞8</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;padding:9px 0;">
+              <div style="width:22px;height:22px;border-radius:7px;border:2px solid #d7dae3;flex-shrink:0;"></div>
+              <div style="flex:1;"><div style="font-size:14px;color:#0e1525;">耳?대툝 ?뚮씪??/div></div>
+              <span style="font-family:'Space Grotesk',sans-serif;font-size:12px;color:#6b7385;">3횞12</span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;border-top:1px solid #eaecf2;background:#fff;padding:10px 4px 13px;">
+          <div style="flex:1;text-align:center;"><span style="font-size:11px;font-weight:500;color:#9aa1b2;">??/span></div>
+          <div style="flex:1;text-align:center;"><span style="font-size:11px;font-weight:500;color:#9aa1b2;">?좎껜</span></div>
+          <div style="flex:1;text-align:center;"><span style="font-size:11px;font-weight:500;color:#9aa1b2;">泥섎갑</span></div>
+          <div style="flex:1;text-align:center;"><span style="font-size:11px;font-weight:500;color:#9aa1b2;">?꾧컧</span></div>
+          <div style="flex:1;text-align:center;"><span style="font-size:11px;font-weight:700;color:#2f54ff;">湲곕줉</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 7. LIBRARY ========== -->
+    <div style="flex:none;width:340px;">
+      <div style="font-size:13px;font-weight:600;color:#56534c;margin-bottom:14px;">???대룞 ?꾧컧</div>
+      <div style="width:340px;height:740px;background:#fff;border-radius:44px;overflow:hidden;box-shadow:0 28px 64px rgba(20,20,40,0.20),0 4px 12px rgba(0,0,0,0.06);display:flex;flex-direction:column;border:1px solid rgba(0,0,0,0.05);">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:15px 26px 4px;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;color:#0e1525;">
+          <span>9:41</span>
+          <div style="display:flex;align-items:flex-end;gap:5px;"><div style="display:flex;gap:2px;align-items:flex-end;height:11px;"><div style="width:3px;height:5px;background:#0e1525;border-radius:1px;"></div><div style="width:3px;height:7px;background:#0e1525;border-radius:1px;"></div><div style="width:3px;height:9px;background:#0e1525;border-radius:1px;"></div><div style="width:3px;height:11px;background:#0e1525;border-radius:1px;"></div></div><div style="width:22px;height:11px;border:1.5px solid #0e1525;border-radius:3px;padding:1.5px;"><div style="width:70%;height:100%;background:#0e1525;border-radius:1px;"></div></div></div>
+        </div>
+        <div style="flex:1;overflow:hidden;padding:14px 22px 0;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+            <div style="width:26px;height:26px;border-radius:8px;background:#2f54ff;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;color:#fff;">W</div>
+            <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;letter-spacing:-0.5px;color:#0e1525;">WeFitAI</span>
+            <span style="font-size:13px;color:#9aa1b2;margin-left:auto;">?대룞 ?꾧컧</span>
+          </div>
+          <!-- search -->
+          <div style="height:46px;border:1px solid #eaecf2;border-radius:11px;display:flex;align-items:center;gap:10px;padding:0 15px;margin-bottom:14px;">
+            <div style="width:14px;height:14px;border:1.8px solid #c2c7d2;border-radius:50%;flex-shrink:0;"></div>
+            <span style="font-size:14px;color:#c2c7d2;">?대룞 ?대쫫 ?먮뒗 洹쇱쑁 寃??/span>
+          </div>
+          <!-- category chips -->
+          <div style="display:flex;gap:7px;margin-bottom:18px;overflow:hidden;">
+            <div style="flex-shrink:0;font-size:13px;font-weight:700;color:#fff;background:#2f54ff;padding:7px 14px;border-radius:20px;">?꾩껜 <span style="font-family:'Space Grotesk',sans-serif;opacity:0.8;">48</span></div>
+            <div style="flex-shrink:0;font-size:13px;color:#6b7385;border:1px solid #eaecf2;padding:7px 14px;border-radius:20px;">媛??<span style="font-family:'Space Grotesk',sans-serif;color:#c2c7d2;">9</span></div>
+            <div style="flex-shrink:0;font-size:13px;color:#6b7385;border:1px solid #eaecf2;padding:7px 14px;border-radius:20px;">??<span style="font-family:'Space Grotesk',sans-serif;color:#c2c7d2;">8</span></div>
+            <div style="flex-shrink:0;font-size:13px;color:#6b7385;border:1px solid #eaecf2;padding:7px 14px;border-radius:20px;">?섏껜</div>
+          </div>
+          <div style="font-size:12px;color:#9aa1b2;margin-bottom:12px;">48媛??대룞</div>
+          <!-- exercise cards -->
+          <div style="border:1px solid #eaecf2;border-radius:14px;padding:15px 16px;margin-bottom:10px;">
+            <div style="display:flex;align-items:center;gap:13px;">
+              <div style="width:42px;height:42px;border-radius:11px;background:#ecf0ff;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><div style="width:16px;height:16px;border-radius:5px;background:#2f54ff;"></div></div>
+              <div style="flex:1;min-width:0;">
+                <div style="font-weight:700;font-size:15px;color:#0e1525;margin-bottom:6px;">踰ㅼ튂?꾨젅??/div>
+                <div style="display:flex;gap:5px;flex-wrap:wrap;"><span style="font-size:10px;font-weight:600;color:#2f54ff;background:#ecf0ff;padding:2px 8px;border-radius:7px;">以묎툒</span><span style="font-size:10px;color:#6b7385;background:#f7f8fb;padding:2px 8px;border-radius:7px;">諛붾꺼</span><span style="font-size:10px;color:#6b7385;background:#f7f8fb;padding:2px 8px;border-radius:7px;">蹂듯빀</span><span style="font-size:10px;color:#2f54ff;background:#f7f8fb;padding:2px 8px;border-radius:7px;">???곸긽</span></div>
+              </div>
+              <span style="color:#c2c7d2;font-size:13px;flex-shrink:0;">??/span>
+            </div>
+          </div>
+          <div style="border:1px solid #eaecf2;border-radius:14px;padding:15px 16px;margin-bottom:10px;">
+            <div style="display:flex;align-items:center;gap:13px;">
+              <div style="width:42px;height:42px;border-radius:11px;background:#f7f8fb;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><div style="width:16px;height:16px;border-radius:50%;background:#9aa1b2;"></div></div>
+              <div style="flex:1;min-width:0;">
+                <div style="font-weight:700;font-size:15px;color:#0e1525;margin-bottom:6px;">?ロ??ㅼ슫</div>
+                <div style="display:flex;gap:5px;flex-wrap:wrap;"><span style="font-size:10px;font-weight:600;color:#2f54ff;background:#ecf0ff;padding:2px 8px;border-radius:7px;">珥덇툒</span><span style="font-size:10px;color:#6b7385;background:#f7f8fb;padding:2px 8px;border-radius:7px;">癒몄떊</span><span style="font-size:10px;color:#6b7385;background:#f7f8fb;padding:2px 8px;border-radius:7px;">蹂듯빀</span></div>
+              </div>
+              <span style="color:#c2c7d2;font-size:13px;flex-shrink:0;">??/span>
+            </div>
+          </div>
+          <div style="border:1px solid #eaecf2;border-radius:14px;padding:15px 16px;margin-bottom:10px;">
+            <div style="display:flex;align-items:center;gap:13px;">
+              <div style="width:42px;height:42px;border-radius:11px;background:#f7f8fb;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><div style="width:16px;height:16px;border-radius:4px;background:#9aa1b2;"></div></div>
+              <div style="flex:1;min-width:0;">
+                <div style="font-weight:700;font-size:15px;color:#0e1525;margin-bottom:6px;">諛붾꺼 ?ㅼ옘??/div>
+                <div style="display:flex;gap:5px;flex-wrap:wrap;"><span style="font-size:10px;font-weight:600;color:#e5484d;background:#fdeced;padding:2px 8px;border-radius:7px;">以묎툒~怨좉툒</span><span style="font-size:10px;color:#6b7385;background:#f7f8fb;padding:2px 8px;border-radius:7px;">諛붾꺼</span><span style="font-size:10px;color:#2f54ff;background:#f7f8fb;padding:2px 8px;border-radius:7px;">???곸긽</span></div>
+              </div>
+              <span style="color:#c2c7d2;font-size:13px;flex-shrink:0;">??/span>
+            </div>
+          </div>
+          <div style="border:1px solid #eaecf2;border-radius:14px;padding:15px 16px;">
+            <div style="display:flex;align-items:center;gap:13px;">
+              <div style="width:42px;height:42px;border-radius:11px;background:#f7f8fb;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><div style="width:16px;height:16px;border-radius:50%;border:3px solid #9aa1b2;"></div></div>
+              <div style="flex:1;min-width:0;">
+                <div style="font-weight:700;font-size:15px;color:#0e1525;margin-bottom:6px;">?ㅻ꺼 ?꾨뜑?꾨젅??/div>
+                <div style="display:flex;gap:5px;flex-wrap:wrap;"><span style="font-size:10px;font-weight:600;color:#2f54ff;background:#ecf0ff;padding:2px 8px;border-radius:7px;">珥덇툒~以묎툒</span><span style="font-size:10px;color:#6b7385;background:#f7f8fb;padding:2px 8px;border-radius:7px;">?ㅻ꺼</span><span style="font-size:10px;color:#6b7385;background:#f7f8fb;padding:2px 8px;border-radius:7px;">蹂듯빀</span></div>
+              </div>
+              <span style="color:#c2c7d2;font-size:13px;flex-shrink:0;">??/span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;border-top:1px solid #eaecf2;background:#fff;padding:10px 4px 13px;">
+          <div style="flex:1;text-align:center;"><span style="font-size:11px;font-weight:500;color:#9aa1b2;">??/span></div>
+          <div style="flex:1;text-align:center;"><span style="font-size:11px;font-weight:500;color:#9aa1b2;">?좎껜</span></div>
+          <div style="flex:1;text-align:center;"><span style="font-size:11px;font-weight:500;color:#9aa1b2;">泥섎갑</span></div>
+          <div style="flex:1;text-align:center;"><span style="font-size:11px;font-weight:700;color:#2f54ff;">?꾧컧</span></div>
+          <div style="flex:1;text-align:center;"><span style="font-size:11px;font-weight:500;color:#9aa1b2;">湲곕줉</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="max-width:1180px;margin-top:64px;padding-top:28px;border-top:1px solid #d4d2cb;font-size:14px;color:#807d76;line-height:1.7;">
+    <b>Style C 쨌 EDGE</b> ??7媛??붾㈃ ?꾩껜. ?붿씠??+ 肄붾컻??#2F54FF) ?⑥씪 ?ъ씤?? 1px ?ㅼ뼱?쇱씤, Space&nbsp;Grotesk ?レ옄. 媛??붿냼??吏곸젒 ?대┃???됀룻뀓?ㅽ듃瑜??섏젙?????덉뼱?? ?명꽣?숉떚釉??꾨줈?좏????ㅼ젣 ???꾪솚쨌?낅젰 ?숈옉)?쇰줈 留뚮뱾???쒕┫ ?섎룄 ?덉뒿?덈떎.
+  </div>
+
+  
+
+</div>
+</x-dc>
+
+
+</body></html>
